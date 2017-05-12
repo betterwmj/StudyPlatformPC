@@ -15,8 +15,10 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	vm.onlineQuesionsDetail =null;
 	vm.currentClass=null;
 	vm.isHistroy =null;
+	let  onlineQuesionsDetail=null;
 	function init(){ 
 	    vm.onlineQuesionsDetail = $stateParams.onlineQuestionsDetail; 
+	    onlineQuesionsDetail =vm.onlineQuesionsDetail;
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
 	    getQuestionReply();
@@ -72,7 +74,9 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 				   if(id === item.answerId && item.type ===1 ){
 					   newReplyList.push(item);
 				   }
-				   
+				   if(vm.onlineQuesionsDetail.studentId === item.answerId && item.type ===0 ){
+					   newReplyList.push(item);
+				   }
 			   });
 			   vm.replyList=newReplyList;
 		   }else{
@@ -92,6 +96,23 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 		   $state.go("teacher.onlineanswer",{currentClass:vm.currentClass});
 	   }   
    }
+   vm.deleleReply = async function(replyId,answerId){
+	   let userinfo = $cookies.getObject("userInfo");
+		   if(parseInt("10", userinfo.id) === answerId){
+			   let comfirm =await showConfrimMsg("是否删除此条回复?");
+			   if(comfirm==="确定"){
+				   let result= await http.get('DeleteReply',{ReplyID:replyId});
+				   if(result === true){
+					   vm.onlineQuesionsDetail=onlineQuesionsDetail;
+					   getQuestionReply();
+				   }else{
+					   showErrMsg("删除失败");
+				   }	 
+		   } 
+	   }
+	   
+   }
+   
    function showErrMsg(errMsg) {
 	     
 	      dialog.openDialog({
@@ -101,5 +122,12 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	      });
 	    
 	}
+   async function showConfrimMsg(confirmMsg) {
+	      return await dialog.openDialog({
+	          type: "normal",
+	          title: "操作提示",
+	          content: confirmMsg
+	      });
+	  }
    
 }
