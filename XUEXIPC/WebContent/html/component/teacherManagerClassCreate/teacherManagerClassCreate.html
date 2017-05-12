@@ -33,7 +33,7 @@
                         <td ng-bind="item.classes.className"></td>
                         <td ng-bind="item.subjectName"></td>
                         <td> 
-                        	<a class="btn" ui-sref="teacher.classStudent({'class':item.classId})">查看详情</a>
+                        	<a class="btn" ui-sref="teacher.classStudent({classId:item.classes.classId})">查看详情</a>
                         </td>
                     </tr>
                 </tbody>

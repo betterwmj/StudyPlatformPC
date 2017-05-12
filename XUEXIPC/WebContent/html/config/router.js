@@ -371,12 +371,28 @@ export function routerConfig($stateProvider){
 			{
 				name:"teacher.teacherManagerClassCreate",
 				url: '/teacherManagerClassCreate',
+				
 				views:{
 					"head@":{
 						component:"teacherSidebar"
 					},
 					"content@":{
 						component:"teacherManagerClassCreate"
+					},
+				}
+			},
+			{
+				name:"teacher.classStudent",
+				url: '/classStudent/{classId}',
+				params:{
+					classId:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherClassStudent"
 					},
 				}
 			},

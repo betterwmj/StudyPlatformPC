@@ -1,0 +1,35 @@
+
+<div class="main-body">
+    <div class="tabs">
+        <a class="active" ui-sref="teacher.teacherManagerClassCreate">创建班级</a>
+        <a ui-sref="teacher.teacherAssignStudent">分配学生</a>
+        <a ui-sref="teacher.UserInfo">个人中心</a>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            
+                <span class="label">学生信息</span>
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>姓名</th>
+                    <th>学号</th>
+                    <th>手机号码</th>
+                    <th></th>
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="item in $ctrl.classStudent">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="item.school_number"></td>
+                        <td ng-bind="item.realName"></td>
+                        <td ng-bind="item.telephone"></td>
+                         <td> 
+                        	<button class="btn" ng-click="$ctrl.deleteStudent(item.userID)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

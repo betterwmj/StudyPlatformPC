@@ -13,6 +13,8 @@ import registerTeacher from "./component/registerTeacher/registerTeacher.js";
 import teacherCenter from "./component/teacherCenter/teacherCenter.js";
 import homeworkDetail from "./component/homeworkDetail/homeworkDetail.js";
 import teacherManagerClassCreate from "./component/teacherManagerClassCreate/teacherManagerClassCreate.js";
+import teacherClassStudent from "./component/teacherClassStudent/teacherClassStudent.js";
+
 import teacherAssignStudent from "./component/teacherAssignStudent/teacherAssignStudent.js";
 import teacherPaper from "./component/teacherPaper/teacherPaper.js";
 import teacherPaperNavigation from "./component/teacherPaperNavigation/teacherPaperNavigation.js";
@@ -93,6 +95,7 @@ teacherOnlineAnswerDetail(app);
 teacherOnlineAnswerNavigation(app);
 teacheronlineHistoryAnswer(app);
 teacherUserInfo(app);
+teacherClassStudent(app);
 
 studentTest(app);
 studentTestPaperList(app);
