@@ -22,6 +22,14 @@
 		      <button type="button" class="btn btn-default" ng-click="$ctrl.sure()">确认</button>
 		      <p ng-bind="$ctrl.msg"></p>
 	      </div>
+	       <div class="form-item single-line">
+                    <span class="label">图片</span>
+                    <span class="file clearfix">
+                            <input type="file" accept="image/*"  class="js_product_imgs">
+                            <img width="200" height ="300" ng-attr-src="{{img.src}}" alt=""/>
+                            <button class="btn" type="button" ng-click="$ctrl.uploadImg()">上传</button>
+                    </span>
+              </div>
         </div>
     </div>
 </div>

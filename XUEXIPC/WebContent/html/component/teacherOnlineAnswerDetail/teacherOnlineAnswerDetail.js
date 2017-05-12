@@ -22,6 +22,10 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
 	    getQuestionReply();
+	    setTimeout(function(){
+            let imgInputs = findImgInput();
+            imgInputs.eq(0).bind("change",onSelectImg);
+        },0);
    }
    vm.reply=function(){
 	   vm.isShow = true;
@@ -112,7 +116,45 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	   }
 	   
    }
-   
+   function findImgInput(){
+       return angular.element(document.getElementsByClassName("js_product_imgs"));
+   }
+   vm.uploadImg = async function(){
+	   let imgs=[];
+       imgs = findImgInput();
+       let file=[];
+       for(var i=0;i<imgs.length;i++){
+           if(imgs[i].files[0]!==undefined){
+                file.push(imgs[i].files[0]);
+           } 
+       }
+       let formData = new FormData();
+       for(var i=0;i<imgs.length;i++){
+           formData.append("img"+i,imgs[i]);
+       } 
+       console.log(imgs[i]);
+       let imgResult = await http.post("UploadImage",formData);
+   }
+   function onSelectImg(event){
+       let parentElement=event.target.parentNode;
+       let img=null;
+       for(let i=0;i<parentElement.children.length;i++){
+           if(parentElement.children[i].nodeName==="IMG"){
+               img=parentElement.children[i];
+           }
+       }
+       let files=event.target.files;
+       if( files.length === 0 ){
+           img.src="";
+           return;
+       }
+       let file = files[0];
+       let reader = new FileReader();
+       reader.onload = function(e) { 
+           img.src = e.target.result;
+       }; 
+       reader.readAsDataURL(file);
+   }
    function showErrMsg(errMsg) {
 	     
 	      dialog.openDialog({

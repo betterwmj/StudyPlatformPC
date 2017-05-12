@@ -26,7 +26,8 @@ function controller($scope,$element,$state,$cookies,http){
 				vm.classes = classes;
 				vm.classes.forEach( async (item)=>{
 					let result =await http.get("GetClassNameByClassId",{"classID":item.classId});
-					item.className=result.className;
+					if(result!=null)
+					   item.className=result.className;
 				});
 			} catch (error) {
 			

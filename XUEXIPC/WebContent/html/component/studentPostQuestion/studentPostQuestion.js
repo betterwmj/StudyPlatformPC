@@ -21,14 +21,17 @@ function controller($scope,$element,$state,$cookies,http){
     let userInfo = $cookies.getObject("userInfo");
     let subjectTeacherData = await http.get("GetAllSubject");
     vm.subjectList = dataGroup(subjectTeacherData);
-    vm.currSubject = vm.subjectList[0];
-    vm.currSubjectId = vm.currSubject.SubjectID;
-    vm.currTeacher = vm.currSubject.teacherList[0];
+    if(vm.subjectList.length !==0){
+    	 vm.currSubject = vm.subjectList[0];
+    	 vm.currSubjectId = vm.currSubject.SubjectID;
+    	 vm.currTeacher = vm.currSubject.teacherList[0];
+    }  
     $scope.$watch("$ctrl.currSubject",function(){
       vm.currSubject = vm.subjectList.find(function(item){
         return item.SubjectID === vm.currSubject.SubjectID;
       });
-      vm.currTeacher = vm.currSubject.teacherList[0];
+      if(vm.currSubject!=null)
+       vm.currTeacher = vm.currSubject.teacherList[0];
     });
   }
 
