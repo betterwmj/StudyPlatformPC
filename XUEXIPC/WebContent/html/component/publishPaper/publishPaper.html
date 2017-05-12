@@ -18,6 +18,7 @@
                     <th>试卷名称</th>
                     <th>创建时间</th>
                     <th>操作</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,10 @@
                        <button class="btn" ng-if="paper.status === 0" ng-click="$ctrl.publishPaper(paper)">发布<button>
                     
                        <button class="btn" ng-if="paper.status === 1"  ui-sref="teacher.paperResult({testpaperID:paper.testpaperID,testName:paper.testName})">查看</button>
+                    </td>
+                     <td>
+                      
+                       <button class="btn"  ng-click="$ctrl.deletePaper(paper.testpaperID)">删除</button>
                     </td>
                  </tr>
                 </tbody>

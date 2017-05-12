@@ -22,6 +22,25 @@ function controller($scope,$element,$state,$cookies,http){
       showErrMsg("获取作业列表异常");
     }
   }
+  vm.deleteHomeWork =async function(homeId){
+	  let confirm =await showConfrimMsg("是否删除该作业?");
+	     if(confirm ==="确定"){
+		     let result = await http.get("DeleteHomeWork",{
+		    	 homeworkID:homeId
+		      });
+		      if( result === true ){
+		        showErrMsg("作业删除成功");
+		        vm.homeworks = await http.get("GetHomework");
+		        vm.homeworks.forEach( (item)=>{
+		          if( item.finishTime ){
+		            item.finishTime = new Date(item.finishTime.time);
+		          }
+		        });
+		      }else{
+		        showErrMsg("删除失败");
+		      }
+	     }    
+  }
   function showErrMsg(errMsg) {
 	     
       dialog.openDialog({
@@ -30,6 +49,13 @@ function controller($scope,$element,$state,$cookies,http){
           content: errMsg
       });
     
+  }
+  async function showConfrimMsg(confirmMsg) {
+      return await dialog.openDialog({
+          type: "normal",
+          title: "操作提示",
+          content: confirmMsg
+      });
   }
 
 }

@@ -41,6 +41,23 @@ function controller($scope,$element,$state,$cookies,http){
       showErrMsg("发布试卷失败");
     }  
   }
+  vm.deletePaper =async function(paperId){
+	  let confirm =await showConfrimMsg("是否删除该试卷?");
+	     if(confirm ==="确定"){
+		     let result = await http.get("DeletePaper",{
+		    	 paperID:paperId
+		      });
+		      if( result === true ){
+		        showErrMsg("试卷删除成功");
+		        vm.papers = await http.get("GetPaper");
+		        vm.papers.forEach( (item)=>{
+		      	  item.createTime =new Date(item.createTime.time);
+		        });
+		      }else{
+		        showErrMsg("删除失败");
+		      }
+	     }    
+  }
   function showErrMsg(errMsg) {
 	     
       dialog.openDialog({
@@ -49,5 +66,12 @@ function controller($scope,$element,$state,$cookies,http){
           content: errMsg
       });
     
+  }
+  async function showConfrimMsg(confirmMsg) {
+      return await dialog.openDialog({
+          type: "normal",
+          title: "操作提示",
+          content: confirmMsg
+      });
   }
 }
