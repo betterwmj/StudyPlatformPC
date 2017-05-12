@@ -1,0 +1,573 @@
+export function routerConfig($stateProvider){
+    var states = [
+			{
+				name: 'login',
+				url: '/login',
+				views:{
+					"content":{
+						component:"login"
+					}
+				}
+			},
+			{
+				name:"student",
+				url: '/student',
+				abstract:true,
+			},
+			{
+				name:"student.register",
+				url: '/register',
+				views:{
+					"content@":{
+						component:"registerStudent"
+					}
+				}
+			},
+			
+			{
+				name:"student.test",
+				url: '/test',
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentTest"
+					}
+				}
+			},
+			{
+				name:"student.studentTestPaperList",
+				url: '/studentTestPaperList/{SubjectName}/{SubjectID}/{teacherID}',
+				params:{
+					SubjectName:null,
+					SubjectID:null,
+					teacherID:null
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentTestPaperList"
+					}
+				}
+			},
+			{
+				name:"student.studentTestPaper",
+				url: '/studentTestPaper/{SubjectName}/{SubjectID}/{teacherID}/{testpaperID}/{testName}',
+				params:{
+					SubjectName:null,
+					SubjectID:null,
+					teacherID:null,
+					testpaperID:null,
+					testName:null,
+					
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentTestPaper"
+					}
+				}
+			},
+			{
+				name:"student.studentTestPaperResultDetail",
+				url: '/studentTestPaperResultDetail/{SubjectName}/{SubjectID}/{teacherID}/{testpaperID}/{paperResultID}',
+				params:{
+					SubjectName:null,
+					SubjectID:null,
+					teacherID:null,
+					testpaperID:null,
+					paperResultID:null
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentTestPaperResultDetail"
+					}
+				}
+			},
+			{
+				name:"student.homework",
+				url: '/homework',
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentHomework"
+					}
+				}
+			},
+			{
+				name:"student.studentHomeworkList",
+				url: '/studentHomeworkList/{SubjectName}/{SubjectID}',
+				params:{
+					SubjectName:null,
+					SubjectID:null,
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentHomeworkList"
+					}
+				}
+			},
+			{
+				name:"student.studentHomeworkDetail",
+				url: '/studentHomeworkDetail/{homeWorkName}/{homeworkId}/{SubjectName}/{SubjectID}',
+				params:{
+					homeWorkName:null,
+					homeworkId:null,
+					SubjectName:null,
+					SubjectID:null,
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentHomeworkDetail"
+					}
+				}
+			},
+			{
+				name:"student.studentHomeworkResultDetail",
+				url: '/studentHomeworkResultDetail/{homeworkId}/{SubjectName}/{SubjectID}',
+				params:{
+					homeworkId:null,
+					SubjectName:null,
+					SubjectID:null,
+					
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentHomeworkResultDetail"
+					}
+				}
+			},
+			{
+
+				name:"student.question",
+				url: '/question',
+				
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentOnlineNavigation"
+
+					}
+				}
+			},
+			
+			{
+				name:"student.onlineQuestion",
+				url: '/onlineQuestion',
+				params:{
+					currentClass:null
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"onlineQuestion"
+					}
+				}
+			},
+			{
+				name:"student.postQuestion",
+				url: '/postQuestion',
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentPostQuestion"
+					}
+				}
+			},
+			{
+				name:"student.studentOnlineAnswerDetail",
+				url: '/studentOnlineAnswerDetail',
+				params:{
+					onlineQuestionsDetail:null,
+					currentClass:null,
+					isHistroy:null
+				},
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentOnlineAnswerDetail"
+					}
+				}
+			},
+			{
+				name:"student.studentQuestionHistory",
+				url: '/studentQuestionHistory',
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentQuestionHistory"
+					}
+				}
+			},
+			{
+				name:"student.center",
+				url: '/center',
+				views:{
+					"head@":{
+						component:"studentSidebar"
+					},
+					"content@":{
+						component:"studentCenter"
+					}
+				}
+			},
+			{
+				name:"teacher",
+				url: '/teacher',
+				abstract:true,
+			},
+			{
+				name:"teacher.register",
+				url: '/register',
+				views:{
+					"content@":{
+						component:"registerTeacher"
+					}
+				}
+			},
+			{
+				name:"teacher.paper",
+				url: '/paper',
+				views:{
+					
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherPaperNavigation"
+					}
+				}
+			},
+			{
+				name:"teacher.paperCreate",
+				url: '/paperCreate',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherPaper"
+					}
+				}
+			},
+			{
+				name:"teacher.publishPaper",
+				url: '/publishPaper',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"publishPaper"
+					}
+				}
+			},
+			{
+				name:"teacher.paperDetail",
+				url: '/paperDetail/{testpaperID}/{testName}',
+				params:{
+					testpaperID:null,
+					testName:null,
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"paperDetail"
+					}
+				}
+			},
+			{
+				name:"teacher.paperResult",
+				url: '/paperResult/{testpaperID}/{testName}',
+				params:{
+					testpaperID:null,
+					testName:null,
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"paperResult"
+					}
+				}
+			},
+			{
+				name:"teacher.paperResultDetail",
+				url: '/paperResultDetail/{resultId}/{testpaperID}/{testName}',
+				params:{
+					resultId:null,
+					testpaperID:null,
+					testName:null,
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"paperResultDetail"
+					}
+				}
+			},
+			{
+				name:"teacher.center",
+				url: '/center',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherCenter"
+					}
+				}
+			},
+			{
+				name:"teacher.homeworkDetail",
+				url: '/homeworkDetail/{homeworkId}/{homeWorkName}',
+				params:{
+					homeWorkName:null,
+					homeworkId:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"homeworkDetail"
+					}
+				}
+			},
+			{
+				name:"teacher.teacherManagerClassCreate",
+				url: '/teacherManagerClassCreate',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherManagerClassCreate"
+					},
+				}
+			},
+			{
+				name:"teacher.teacherAssignStudent",
+				url: '/teacherAssignStudent',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherAssignStudent"
+					},
+				}
+			},
+			{
+				name:"teacher.homework",
+				url: '/homework',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherHomeworkNavigation"
+					}
+				}
+			},
+			{
+				name:"teacher.homeworkCreate",
+				url: '/homeworkCreate',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"homeworkCreate"
+					},
+				}
+			},
+			{
+				name:"teacher.homeWorkHistory",
+				url: '/homeWorkHistory',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"homeWorkHistory"
+					},
+				}
+			},
+			{
+				name:"teacher.publishHomework",
+				url: '/publishHomework/{homeworkId}/{subjectId}',
+				params:{
+					homeworkId:null,
+					subjectId:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"publishHomework"
+					},
+				}
+			},
+			{
+				name:"teacher.teacherHomeworkResultList",
+				url: '/teacherHomeworkResultList/{homeworkId}/{homeWorkName}',
+				params:{
+					homeworkId:null,
+					homeWorkName:null,
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherHomeworkResultList"
+					},
+				}
+			},
+			{
+				name:"teacher.teacherHomeworkResultDetail",
+				url: '/teacherHomeworkResultDetail/{homeworkId}/{homeWorkName}/{homeworkResultID}',
+				params:{
+					homeworkId:null,
+					homeWorkName:null,
+					homeworkResultID:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherHomeworkResultDetail"
+					},
+				}
+			},
+			{
+				name:"teacher.onlineanswerNavigation",
+				url: '/onlineanswerNavigation',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherOnlineAnswerNavigation"
+					},
+				}
+			},
+			{
+				name:"teacher.onlineanswer",
+				url: '/onlineanswer',
+				params:{
+					currentClass:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"onlineAnswer"
+					},
+				}
+			},
+			{
+				name:"teacher.onlineAnswerDetail",
+				url: '/onlineAnswerDetail',
+				params:{
+					onlineQuestionsDetail:null,
+					currentClass:null,
+					isHistroy:null
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherOnlineAnswerDetail"
+					},
+				}
+			},
+			{
+				name:"teacher.onlineHistoryAnswer",
+				url: '/onlineHistoryAnswer',
+				params:{
+					
+				},
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacheronlineHistoryAnswer"
+					},
+				}
+			},
+			{
+				name:"teacher.UserInfo",
+				url: '/UserInfo',
+				views:{
+					"head@":{
+						component:"teacherSidebar"
+					},
+					"content@":{
+						component:"teacherUserInfo"
+					},
+				}
+			},
+			{
+				name:"admin",
+				url:'/admin',
+				abstract:true,
+			},
+			{
+				name:"admin.center",
+				url: '/center',
+				views:{
+					"head@":{
+						component:"adminSidebar"
+					},
+					"content@":{
+						component:"adminCenter"
+					}
+				}
+			},
+			
+  	];
+	states.forEach( (state)=>{
+		$stateProvider.state(state);
+	});
+}

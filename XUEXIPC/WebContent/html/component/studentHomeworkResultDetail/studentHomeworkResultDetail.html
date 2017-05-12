@@ -1,0 +1,29 @@
+
+<header>
+    <div class="float-left">
+        <a ui-sref="student.studentHomeworkList({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID})" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+  </header>
+  <div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+         
+        </div>
+        <div class="panel-body">
+             <p>查看学生作业结果详情</p>
+            <div ng-repeat="item in $ctrl.homeworkResultDetail track by $index">
+              <p ng-bind-template="题目:{{$index}} {{item.title.title}}"></p>
+                <div ng-if="item.title.type === 1">
+                  <p>A.<span ng-bind="item.title.optionA"></span>&nbsp;&nbsp;</p>
+                  <p>B.<span ng-bind="item.title.optionB"></span>&nbsp;&nbsp;</p>
+                  <p>C.<span ng-bind="item.title.optionC"></span>&nbsp;&nbsp;</p>
+                  <p>D.<span ng-bind="item.title.optionD"></span>&nbsp;&nbsp;</p>
+                </div>
+                 <p>
+                                             参考答案:<span ng-bind="item.title.answer"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            学生作答:<span ng-bind="item.HomeResultDetail.answer"></span>
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>

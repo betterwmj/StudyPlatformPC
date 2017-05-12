@@ -1,0 +1,19 @@
+<div ng-show="$ctrl.dialogList.length > 0 ">
+    <div class="mask"></div>
+    <aside class="dialog">
+        <header>
+            <h3 ng-bind="$ctrl.dialogList[0].title">Dialog Title</h3>
+        </header>
+        <section>
+            <p ng-bind="$ctrl.dialogList[0].content">Dialog content</p>
+        </section>
+        <footer>
+            <div class="btn-group">
+                <button class="btn" type="button" 
+                    ng-repeat="btn in $ctrl.dialogList[0].btnList track by $index" 
+                    ng-bind="btn" ng-click="$ctrl.dialogList[0].click(btn)">Cancel</button>
+                <button class="btn btn-impo" type="button" ng-click="$ctrl.dialogList[0].click('确定')">确定</button>
+            </div>
+        </footer>
+    </aside>
+</div>

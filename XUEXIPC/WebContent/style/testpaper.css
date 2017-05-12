@@ -1,0 +1,26 @@
+#PageBody {width:800px;margin:0 auto;height:400px;background:#CCFF00}
+#container {width:100%}
+/*页面主体*/
+#pagebody {
+ width:730px; /*设定宽度*/
+ margin:8px 10px; /*居中*/
+}
+#sidebar {
+ width:200px; /*设定宽度*/
+ text-align:left; /*文字左对齐*/
+ float:left; /*浮动居左*/
+ clear:left; /*不允许左侧存在浮动*/
+ margin-left:35px;
+ overflow:hidden; /*超出宽度部分隐藏*/
+border:1px solid #E00;
+height:200px
+}
+#mainbody {
+ width:516px;
+ text-align:left;
+ float:left; /*向左浮动*/
+ margin-left:10px;
+ overflow:hidden;
+border:1px solid #E00;
+height:200px
+}

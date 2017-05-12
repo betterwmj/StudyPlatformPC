@@ -1,0 +1,31 @@
+ <header>
+    <div class="float-left">
+        <a ui-sref="student.studentTestPaperList({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,teacherID:$ctrl.subject.teacherID})" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+  </header>
+  <div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>测试结果</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+             <p>查看学生考试结果详情</p>
+             <p>得分:<span ng-bind="$ctrl.paperResult.paper.score"></span>,
+                                     答题时间:<span ng-bind="$ctrl.paperResult.paper.time | date:'yyyy-MM-dd HH:mm:ss'"></span>
+             </p>
+            <div ng-repeat="item in $ctrl.resultDetail">
+              <p ng-bind="item.title.title"></p>
+              <div ng-if="item.title.type === 1">
+              <p>A.<span ng-bind="item.title.optionA"></span>&nbsp;&nbsp;</p>
+              <p>B.<span ng-bind="item.title.optionB"></span>&nbsp;&nbsp;</p>
+              <p>C.<span ng-bind="item.title.optionC"></span>&nbsp;&nbsp;</p>
+              <p>D.<span ng-bind="item.title.optionD"></span>&nbsp;&nbsp;</p>
+            </div>
+            <p>标准答案:<span ng-bind="item.title.answer"></span>&nbsp;&nbsp;</p>
+            <p>学生答案:<span ng-bind="item.paperResultDetail.answer"></span>&nbsp;&nbsp;</p>
+            </div>
+            </div>
+        </div>
+    </div>

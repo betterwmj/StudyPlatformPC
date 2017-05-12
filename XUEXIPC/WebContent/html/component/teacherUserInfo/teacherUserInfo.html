@@ -1,0 +1,50 @@
+
+<div class="main-body">
+ <div class="tabs">
+        <a  ui-sref="teacher.teacherManagerClassCreate">创建班级</a>
+        <a  ui-sref="teacher.teacherAssignStudent">分配班级</a>
+        <a  class="active" ui-sref="teacher.UserInfo">个人信息</a>
+     </div>
+    <div class="panel">
+        <div class="panel-body">
+            <div class="form col2 clearfix">
+                <div class="form-item">
+                    <span class="label">教工号</span>
+                    <span class="input">
+                        <input type="text" placeholder="教工号" ng-model="$ctrl.userInfo.teacher_number"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['teacher_number']"></span>
+                </div>
+                <div class="form-item  single-line">
+                    <span class="label">姓名</span>
+                    <span class="input">
+                        <input type="text" class="form-control" placeholder="姓名" ng-model="$ctrl.userInfo.realName">
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['realName']"></span>
+                </div>
+                <div class="form-item">
+                    <span class="label">密码</span>
+                    <span class="input">
+                        <input type="text" placeholder="密码" ng-model="$ctrl.userInfo.password"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['password']"></span>
+                </div>
+                <div class="form-item">
+                     <span class="label">班级</span>
+                     <span class="input">
+                        <span ng-repeat="item in $ctrl.classes">
+                         <input type="text" ng-model="item.classes.className" readonly/>
+                        </span>
+                      </span>
+                       <span class="error-msg" ng-bind="$ctrl.errorMsg['classes']"></span>
+                </div>      
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-impo" ng-click="$ctrl.updateinfo()">确认修改</button>
+            </div>
+            <span style="color:red">{{message}}</span>
+        </div>
+    </div>
+</div>

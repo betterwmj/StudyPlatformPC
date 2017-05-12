@@ -1,0 +1,35 @@
+<header>
+    <span>查看试卷:{{$ctrl.paper.testName}}</span>
+    <div class="float-left">
+        <a ui-sref="teacher.publishPaper" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>试卷详情</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="question in $ctrl.paperDetail">
+                  <p>
+                  <span ng-bind="$index+1"></span>&nbsp;&nbsp;
+                  <span ng-bind="question.title"></span>
+                </p>
+                <div ng-if="question.type === 1">
+                  <p>A.<span ng-bind="question.optionA"></span>&nbsp;&nbsp;</p>
+                  <p>B.<span ng-bind="question.optionB"></span>&nbsp;&nbsp;</p>
+                  <p>C.<span ng-bind="question.optionC"></span>&nbsp;&nbsp;</p>
+                  <p>D.<span ng-bind="question.optionD"></span>&nbsp;&nbsp;</p>
+                </div>
+                <p>
+                                           答案:<span ng-bind="question.answer"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            分值:<span class="badge" ng-bind="question.score"></span>
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</div>

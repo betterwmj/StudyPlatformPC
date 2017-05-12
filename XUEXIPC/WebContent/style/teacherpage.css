@@ -1,0 +1,18 @@
+/*锟斤拷锟斤拷息*/
+body {font:12px Tahoma;margin:0px;text-align:center;}
+a:link,a:visited {font-size:12px;text-decoration: none;}
+a:hover{}
+/*页锟斤拷锟斤拷锟斤拷锟�*/
+
+#header {background:#00AA88}
+#menu ul {list-style:none;margin:0px;}
+#menu ul li {float:left;margin:0 10px}
+#menu {padding:20px 40px 20px 0px}
+/*锟斤拷锟斤拷padding锟斤拷锟教讹拷锟剿碉拷位锟斤拷*/
+#menu ul {float:right;list-style:none;margin:0px;}
+/*锟斤拷锟斤拷锟絝loat:right使锟矫菜碉拷位锟斤拷页锟斤拷锟揭诧拷*/
+#menu ul li {float:left;margin:0 30px}
+#menu ul li {float:left;display:block;line-height:20px;margin:0 30px}
+#menu ul li a:link,#menu ul li a:visited {font-weight:bold;color:white}
+#menu ul li a:hover{}
+/*页锟斤拷撞锟�*/

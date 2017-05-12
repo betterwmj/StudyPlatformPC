@@ -1,0 +1,35 @@
+
+<div class="main-body">
+    <div class="tabs">
+        <a  ui-sref="student.postQuestion">提问</a>
+        <a  ui-sref="student.onlineQuestion">互动中心</a>
+        <a class="active" ui-sref="student.studentQuestionHistory">我的历史提问</a>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                   <th>序号</th>
+                    <th>姓名</th>
+                    <th>标题</th>
+                    <th>时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="question in $ctrl.questionsList track by $index">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="question.studentName"></td>
+                        <td ng-bind="question.questionTitle"></td>
+                        <td ng-bind="question.createTime|date:'yyyy-MM-dd HH:mm:ss'"></td> 
+                        <td> 
+                        	 <a class="btn" ui-sref="student.studentOnlineAnswerDetail({'onlineQuestionsDetail':question,'currentClass':$ctrl.currentClass,'isHistroy':true})">查看详情</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

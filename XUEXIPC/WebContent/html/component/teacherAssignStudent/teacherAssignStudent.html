@@ -1,0 +1,38 @@
+
+<div class="main-body">
+      <div class="tabs">
+        <a  ui-sref="teacher.teacherManagerClassCreate">创建班级</a>
+        <a class="active" ui-sref="teacher.teacherAssignStudent">分配班级</a>
+        <a ui-sref="teacher.UserInfo">个人信息</a>
+     </div>
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <span class="label">选择班级：</span>
+                <select  ng-model="$ctrl.currentClass" ng-options="item as item.classes.className for item in $ctrl.classes">
+                </select>
+            </div>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                   <th>#</th>
+                    <th>姓名</th>
+                    <th>学号</th>
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="student in $ctrl.students">
+                        <td>
+                         <input type="checkbox" ng-model="student.isCheck" aria-label="student.isCheck">
+                        </td>
+                        <td ng-bind="student.realName"></td>
+                        <td ng-bind="student.school_number"></td> 
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn" ng-click="$ctrl.toAssign()">分配学生</button>
+        </div>
+    </div>
+</div>

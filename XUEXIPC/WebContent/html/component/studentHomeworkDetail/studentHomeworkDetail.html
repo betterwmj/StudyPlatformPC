@@ -1,0 +1,43 @@
+
+<header>
+      <span>做题,{{$ctrl.homework.homeWorkName}}</span>
+    <div class="float-left">
+        <a ui-sref="student.homework" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-right">
+                  <p>作业题,共{{$ctrl.homeDetail.length}}道题,第{{$ctrl.currIndex+1}}题</p>
+            </div>
+        </div>
+        <div class="panel-body">
+	        <p ng-bind="$ctrl.curr.title"></p>
+		    <div ng-if="$ctrl.curr.type === 1">
+		      <p>A.<span ng-bind="$ctrl.curr.optionA"></span>&nbsp;&nbsp;</p>
+		      <p>B.<span ng-bind="$ctrl.curr.optionB"></span>&nbsp;&nbsp;</p>
+		      <p>C.<span ng-bind="$ctrl.curr.optionC"></span>&nbsp;&nbsp;</p>
+		      <p>D.<span ng-bind="$ctrl.curr.optionD"></span>&nbsp;&nbsp;</p>
+		      <p>
+		        A<input name="options" type="radio" value="A" ng-model="$ctrl.curr.studentAnswer">
+		        B<input name="options" type="radio" value="B" ng-model="$ctrl.curr.studentAnswer">
+		        C<input name="options" type="radio" value="C" ng-model="$ctrl.curr.studentAnswer">
+		        D<input name="options" type="radio" value="D" ng-model="$ctrl.curr.studentAnswer">
+		      </p>
+		    </div>
+		    <div ng-if="$ctrl.curr.type === 2">
+		      <p>
+		        对<input name="options" type="radio" value="对" ng-model="$ctrl.curr.studentAnswer">
+		        错<input name="options" type="radio" value="错" ng-model="$ctrl.curr.studentAnswer">
+		      </p>
+		    </div>
+		    <div ng-if="$ctrl.curr.type === 3">
+		      <textarea ng-model="$ctrl.curr.studentAnswer"></textarea>
+		    </div>
+              <button class="btn" ng-click="$ctrl.upOrNext('up')">上一题</button>
+              <button class="btn"  ng-click="$ctrl.upOrNext('next')">下一题</button>
+              <button class="btn" ng-click="$ctrl.submit()">提交作业</button>
+        </div>
+     </div>
+ </div>

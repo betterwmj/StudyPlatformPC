@@ -1,0 +1,37 @@
+<header>
+    <span>查看试卷:{{$ctrl.paper.testName}}</span>
+    <div class="float-left">
+        <a ui-sref="teacher.publishPaper" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>试卷成绩列表</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>学生</th>
+                    <th>分数</th>
+                    <th>查看详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.paperResultList">        
+                
+                    <td ng-bind="item.studentName"> </td>
+                    <td ng-bind="item.paper.score"> </td>
+                    <td>
+                       <button class="btn" ui-sref="teacher.paperResultDetail({resultId:item.paper.id,testpaperID:$ctrl.paper.testpaperID,testName:$ctrl.paper.testName})">查看</button>
+                    </td>
+                 </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

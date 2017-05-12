@@ -1,0 +1,40 @@
+
+<div class="main-body">
+     <div class="tabs">
+        <a  ui-sref="teacher.homeworkCreate"> 创建作业</a>
+        <a class="active" ui-sref="teacher.homeWorkHistory">查看我的作业</a>
+ 
+    </div>
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>作业列表</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>作业</th>
+                    <th>计划完成时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.homeworks">        
+                    <td>
+                        <a ui-sref="teacher.homeworkDetail({homeworkId:item.homeId,homeWorkName:item.homeWorkName})" ng-bind="item.homeWorkName"></a>
+                    </td>
+                     <td ng-bind="item.finishTime | date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td>
+                       <button class="btn" ng-if="item.status === 0" ui-sref="teacher.publishHomework({homeworkId:item.homeId,subjectId:item.subjectId})">发布<button>
+                    
+                       <button class="btn" ng-if="item.status === 1"  ui-sref="teacher.teacherHomeworkResultList({homeworkId:item.homeId,homeWorkName:item.homeWorkName})">查看</button>
+                    </td>
+                 </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+
+  <header>
+    <div class="float-left">
+        <a ng-click="$ctrl.previousPage()" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header> 
+ <div class="main-body">
+    <div class="panel">
+        <div class="panel-body">
+            <p>标题:
+	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionTitle"></span><br>
+	        <label>提问者{{$ctrl.onlineQuesionsDetail.studentName}}:</label>
+	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionContent"></span><br>
+	        <p>回复:
+	        <div ng-repeat="reply in $ctrl.replyList">
+	            <label>{{reply.realName}}:</label>
+	            <span ng-bind="reply.answer"></span>
+	                                     回复时间<span ng-bind="reply.answerTime|date:'yyyy-MM-dd HH:mm:ss'"></span>
+	        </div>
+	      <button type="button" class="btn btn-default" ng-click="$ctrl.reply()">回复</button><br>
+	      <div ng-show="$ctrl.isShow">
+		      <textarea rows="8" cols="35" ng-model="$ctrl.answerContent"></textarea><br>
+		      <button type="button" class="btn btn-default" ng-click="$ctrl.sure()">确定</button>
+		      <p ng-bind="$ctrl.msg"></p>
+	      </div>
+        </div>
+    </div>
+</div>
+   

@@ -1,0 +1,63 @@
+<header>
+    <div class="float-left">
+        <a ui-sref="student.test" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+     <div class="tabs">
+        <a ng-class="{true:'active',false:'noactive'}[className1]"  ng-click="$ctrl.goNoAnswered()">未作答</a>
+        <a ng-class="{true:'active',false:'noactive'}[className2]" ng-click="$ctrl.goToAnswered()">已作答</a>
+    </div>
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <span ng-bind="$ctrl.subject.SubjectName"></span>
+                <h3>试卷列表</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+                    <span ng-show="$ctrl.isShowUnfinish">未作答{{$ctrl.paperUnfinish.length}}</span> 
+                <table class="table table-bordered" ng-show="$ctrl.isShowUnfinish">
+               
+                <thead>
+                <tr>
+                    <th>试卷名称</th>
+                    <th>创建时间</th>
+                    <th>更多详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="paper in $ctrl.paperUnfinish">
+                
+                    <td ng-bind="paper.testName"></td>
+                    <td ng-bind="paper.createTime| date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td>
+                        <button  ui-sref="student.studentTestPaper({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,testpaperID:paper.testpaperID,testName:paper.testName})" type="button" class="btn btn-impo">进行测试</button>
+                    </td>
+              
+                </tbody>
+            </table>
+              <span ng-show="$ctrl.isShowFinish">已作答{{$ctrl.paperFinish.length}}</span>     
+              <table class="table table-bordered" ng-show="$ctrl.isShowFinish">
+                                        
+                <thead>
+                <tr>
+                    <th>试卷名称</th>
+                    <th>创建时间</th>
+                    <th>更多详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="paper in $ctrl.paperFinish">
+                
+                    <td ng-bind="paper.testName"></td>
+                    <td ng-bind="paper.createTime | date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td>
+                        <button  ui-sref="student.studentTestPaperResultDetail({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,teacherID:$ctrl.subject.teacherID,testpaperID:paper.testpaperID,paperResultID:paper.resultObj.paper.id})" type="button" class="btn btn-impo">查看更多</button>
+                    </td>
+              
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

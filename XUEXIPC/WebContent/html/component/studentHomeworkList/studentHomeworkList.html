@@ -1,0 +1,63 @@
+<header>
+    <div class="float-left">
+        <span ng-bind="$ctrl.subject.SubjectName"></span>
+        <a ui-sref="student.homework" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+     <div class="tabs">
+        <a ng-class="{true:'active',false:'noactive'}[className1]" ng-click="$ctrl.goNoAnswered()">未作答</a>
+        <a ng-class="{true:'active',false:'noactive'}[className2]" ng-click="$ctrl.goToAnswered()">已作答</a>
+    </div>
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>作业列表</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+                <span  ng-show="$ctrl.isShowUnfinish">未作答{{$ctrl.homeworkListUnFinish.length}}</span> 
+                <table class="table table-bordered" ng-show="$ctrl.isShowUnfinish">
+                
+                <thead>
+                <tr>
+                    <th>作业名称</th>
+                    <th>完成时间</th>
+                    <th>更多详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.homeworkListUnFinish">
+                
+                    <td ng-bind="item.homeWorkName"></td>
+                    <td ng-bind="item.finishTime | date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td>
+                        <button  ui-sref="student.studentHomeworkDetail({homeWorkName:item.homeWorkName,homeworkId:item.homeId})" type="button" class="btn btn-impo">完成作业</button>
+                    </td>
+              
+                </tbody>
+            </table>
+               <span ng-show="$ctrl.isShowFinish">已作答{{$ctrl.homeworkListFinish.length}}</span> 
+              <table class="table table-bordered" ng-show="$ctrl.isShowFinish">
+                                           
+                <thead>
+                <tr>
+                    <th>作业名称</th>
+                    <th>完成时间</th>
+                    <th>更多详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.homeworkListFinish">
+                
+                    <td ng-bind="item.homeWorkName"></td>
+                    <td ng-bind="item.finishTime | date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td>
+                        <button  ui-sref="student.studentHomeworkResultDetail({homeworkId:item.homeId,SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID})" type="button" class="btn btn-impo">查看结果</button>
+                    </td>
+              
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

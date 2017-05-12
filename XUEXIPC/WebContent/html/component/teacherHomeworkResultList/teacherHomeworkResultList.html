@@ -1,0 +1,38 @@
+<header>
+    <div class="float-left">
+        <a ui-sref="teacher.homeWorkHistory" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+               <span>{{$ctrl.homework.homeWorkName}}的作答列表</span>
+            </div>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>学生</th>
+                    <th>作答时间</th>
+                    <th>查看详情</th>
+                     <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="result in $ctrl.homeworkResultList">        
+                
+                    <td ng-bind="result.studentName"> </td>
+                    <td ng-bind="result.homework.time|date:'yyyy-MM-dd HH:mm:ss'"> </td>
+                    <td ng-bind="result.homework.evaluation"> </td>
+                    <td>
+                       <button class="btn" ui-sref="teacher.teacherHomeworkResultDetail({homeworkId:$ctrl.homework.homeworkID,homeWorkName:$ctrl.homework.homeWorkName,homeworkResultID:result.homework.id})">查看详情</button>
+                    </td>
+                 </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

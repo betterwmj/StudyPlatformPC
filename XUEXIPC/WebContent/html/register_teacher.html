@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>老师注册页面</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+  </head>
+  <body class="container-fluid" ng-app="app" ng-controller="registerCtrler">
+    <h3>老师注册</h3>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">用户名</label><span ng-bind="errorMsg.school_number"></span>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="用户名" ng-model="userInfo.school_number">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">真实姓名</label><span ng-bind="errorMsg.realName"></span>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="真实姓名" ng-model="userInfo.realName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">密码</label><span ng-bind="errorMsg.password"></span>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" placeholder="密码" ng-model="userInfo.password">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">确认密码</label><span ng-bind="errorMsg.rePassword"></span>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" placeholder="确认密码" ng-model="userInfo.rePassword">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">选择专业</label>
+        <select class="form-control" 
+            ng-model="currentSpecialities"
+            ng-options="item as item.specialitiesName for item in specialitiesList">
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">选择科目</label>
+        <select class="form-control" 
+            ng-model="currentSubject"
+            ng-options="item as item.SubjectName for item in subjects">
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" class="btn btn-default" ng-click="register()">注册</button>
+        </div>
+      </div>
+    </form>
+    <script src="jslib/angular.js"></script>
+    <script>
+      var app = angular.module("app",[]);
+      app.controller("registerCtrler",["$scope","$http","$q","$httpParamSerializerJQLike",function($scope,$http,$q,$httpParamSerializerJQLike){
+        var isSubmitting = false;
+        function init(){
+          getSpecialities();
+        }
+        init();
+        $scope.userInfo = {
+          school_number:"",
+          realName:"",
+          password:"",
+          rePassword:"",
+          subjectID:"",
+        };
+
+        $scope.errorMsg = {
+          school_number:"",
+          realName:"",
+          password:"",
+          rePassword:"",
+        };
+        $scope.currentSpecialities = null;
+        $scope.specialitiesList = [];
+
+        $scope.currentSubject = null;
+        $scope.subjects = [];
+
+        $scope.register = function(){
+          if( check() === false ) {
+            return;
+          }
+          
+          submit().then(function(){
+            console.log("注册成功");
+          },function(error){
+            console.error(error);
+          });
+        };
+        
+        function getSpecialities(){
+          $http.get("/XUEXI/GetSpecialities")
+          .then( function(response){
+            var result = response.data;
+            $scope.specialitiesList = result.data;
+            $scope.currentSpecialities = $scope.specialitiesList[0];
+          },function(){
+
+          });
+        }
+
+        $scope.$watch("currentSpecialities",function(){
+          if ( !$scope.currentSpecialities ){
+            return;
+          }
+          subjects($scope.currentSpecialities.specialitiesId);
+        },true);
+        function subjects(id){
+          $http.get("/XUEXI/GetAllSubject",{
+            params:{"spencialties":id}
+          })
+          .then(function( response ){
+            var result = response.data;
+            $scope.subjects = result.data;
+            $scope.currentSubject = $scope.subjects[0];
+          },function(){
+
+          });
+        }
+
+        function submit(){
+          return $q(function(resolve,reject){
+            $http({
+              url: "/XUEXI/TeacherRegister",
+              method: 'POST',
+              data: $httpParamSerializerJQLike({
+                school_number:$scope.userInfo.school_number,
+                realName:$scope.userInfo.realName,
+                password:$scope.userInfo.password,
+                subjectID:$scope.currentSubject.SubjectID,
+              }),
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            })
+            .then(function(response){
+              var result = response.data;
+              if(result.code !== 0 ){
+                reject();
+              }else{
+                resolve();
+              }
+            },function(error){
+              reject();
+            });
+          });
+        }
+        
+        function check(){
+            $scope.userInfo.school_number = $scope.userInfo.school_number.trim();
+            $scope.userInfo.realName = $scope.userInfo.realName.trim();
+            $scope.userInfo.password = $scope.userInfo.password.trim();
+            $scope.userInfo.rePassword = $scope.userInfo.rePassword.trim();
+            if( $scope.userInfo.school_number === "" ){
+              $scope.errorMsg.school_number = "不能为空";
+              return false;
+            }else{
+              $scope.errorMsg.school_number = "";
+            }
+            if( $scope.userInfo.realName === "" ){
+              $scope.errorMsg.realName = "不能为空";
+              return false;
+            }else{
+              $scope.errorMsg.realName = "";
+            }
+            if( $scope.userInfo.password === "" ){
+              $scope.errorMsg.password = "不能为空";
+              return false;
+            }else{
+              $scope.errorMsg.password = "";
+            }
+            if( $scope.userInfo.rePassword === "" ){
+              $scope.errorMsg.rePassword = "不能为空";
+              return false;
+            }else{
+              $scope.errorMsg.rePassword = "";
+            }
+            if( $scope.userInfo.password !== $scope.userInfo.rePassword ){
+              $scope.errorMsg.password = "两次输入密码不一致";
+              return false;
+            }
+            return true;
+        };
+      }]);
+    </script>
+  </body>
+</html>

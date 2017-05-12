@@ -1,0 +1,36 @@
+
+    <div class="form login-form">
+               <h3>登录系统</h3>
+                <div class="form-item">
+                    <span class="label">用户名</span>
+                    <span class="input">
+                    <input type="text" name="user_number" class="form-control" placeholder="用户名" ng-model="$ctrl.userInfo.user_number">
+                    </span>
+                </div>
+                <div class="form-item">
+                    <span class="label">密码</span>
+                     <span class="input">
+                    <input type="password" class="form-control" placeholder="密码" ng-model="$ctrl.userInfo.password">
+                     </span>
+                </div>
+          
+                <div class="form-item">
+                     <span class="label"></span>
+                     <span class="input">
+	                <input type="radio" value="1" ng-model="$ctrl.userInfo.type">老师
+	                <input type="radio" value="0" ng-model="$ctrl.userInfo.type">学生
+	                <input type="radio" value="2" ng-model="$ctrl.userInfo.type">管理员
+	                 </span>
+                 </div>
+                 <div class="remember-checkbox">
+                     <label><input type="checkbox" ng-model="$ctrl.remember">记住用户名和密码 </label>
+                   
+                </div>
+                <button class="btn btn-impo" ng-click="$ctrl.login()">登录</button>
+                <button class="btn" ui-sref="teacher.register">教师注册</button>
+                <button class="btn" ui-sref="student.register">学生注册</button>
+                <p style="color:red" ng-bind="$ctrl.msg"></p>
+          
+        </div>
+ 
+

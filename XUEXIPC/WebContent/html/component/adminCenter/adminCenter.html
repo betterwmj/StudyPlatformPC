@@ -1,0 +1,152 @@
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-right">
+                <div class="form-item">
+                    <span class="label">职责：</span>
+                    <select  ng-model="$ctrl.currentType" ng-options="types.label for types in $ctrl.types" ng-change="$ctrl.getUser()">
+                    </select>
+                </div>
+                <div class="search-bar">
+                    <input type="text"  ng-model="$ctrl.user_number" placeholder="请输入教工号或学号"/>
+                    <a href="javascript:;" class="form-item-button" ng-click="$ctrl.search()"><span class="icon icon-search"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered" ng-show="$ctrl.isStudent">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>密码</th>
+                        <th>学校</th>
+                        <th>手机号</th>
+                        <th>编辑</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in $ctrl.userResult track by $index">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="user.school_number"></td>
+                        <td ng-bind="user.realName"></td>
+                        <td ng-bind="user.password"></td>
+                        <td ng-bind="user.school"></td>
+                        <td ng-bind="user.telephone"></td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn"  ng-click="$ctrl.edit(user)">编辑</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn"  ng-click="$ctrl.deleteUser(user)">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="form-item">
+                                <input type="text" ng-model="$ctrl.school_number" placeholder="请输入学生学号"/>
+                                <span class="error-msg" ng-if="!$ctrl.school_number">请输入学生学号</span>
+                                <span class="error-msg" ng-bind="$ctrl.message"></span>
+                            </div>
+                        </td>
+                         <td>
+                            <div class="form-item">
+                                <input type="text" ng-model="$ctrl.studentRealName" placeholder="请输入学生姓名"/>
+                                <span class="error-msg" ng-if="!$ctrl.studentRealName">请输入学生姓名</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-impo"  ng-disabled="!$ctrl.school_number||!$ctrl.studentRealName "  ng-click="$ctrl.addStudent()">添加学生</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered" ng-show="$ctrl.isTeacher">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>教工号</th>
+                        <th>姓名</th>
+                        <th>密码</th>
+                        <th>编辑</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in $ctrl.userResult track by $index">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="user.teacher_number"></td>
+                        <td ng-bind="user.realName"></td>
+                        <td ng-bind="user.password"></td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn"  ng-click="$ctrl.edit(user)">编辑</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn"  ng-click="$ctrl.deleteUser(user)">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="form-item">
+                                <input type="text" ng-model="$ctrl.teacher_number" placeholder="请输入教工号"/>
+                                <span class="error-msg" ng-if="!$ctrl.teacher_number">请输入教工号</span>
+                            </div>
+                        </td>
+                         <td>
+                            <div class="form-item">
+                                <input type="text" ng-model="$ctrl.teacherRealName" placeholder="请输入老师姓名"/>
+                                <span class="error-msg" ng-if="!$ctrl.teacherRealName">请输入老师姓名</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-impo"  ng-disabled="!$ctrl.teacherRealName || !$ctrl.teacher_number" ng-click="$ctrl.addTeacher()">添加老师</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+             <div class="table-footer">
+                <div class="float-right">
+                    <ul class="pager" uib-pagination  class="pagination-sm"  items-per-page="$ctrl.pageItem" max-size="$ctrl.maxSize"
+                       boundary-link-numbers="true" 
+                       previous-text="上一页" next-text="下一页" 
+                   total-items="$ctrl.allUser.length" ng-model="$ctrl.currentPage" ng-change="$ctrl.pageChanged()"></ul>
+                  
+                </div>
+            </div>
+	        <div ng-show="$ctrl.isShow"  ng-style="$ctrl.style">
+	             <div class="form-item">
+	             <span class="label">姓名：</span><input type="text" ng-model="$ctrl.userinfo.realName" placeholder="请输入姓名"/><br>
+	             <span class="label">学号：</span><input type="text" ng-model="$ctrl.userinfo.school_number" placeholder="请输入学号"/><br>
+	             <span class="label">密码：</span><input type="text" ng-model="$ctrl.userinfo.password" placeholder="请输入密码"/><br>
+	             <span class="label">学校：</span><input type="text" ng-model="$ctrl.userinfo.school" placeholder="请输入学校"/><br>
+	             </div>
+                 <button class="btn btn-impo"   ng-click="$ctrl.updateStudent()">确认</button>
+                 <button class="btn btn-impo"   ng-click="$ctrl.dismiss()">取消</button>      
+            </div>
+            <div ng-show="$ctrl.isShow3"  ng-style="$ctrl.style">
+	             <div class="form-item">
+	             <span class="label">教工号：</span><input type="text" ng-model="$ctrl.userinfo.teacher_number" placeholder="请输入教工号"/><br>
+	              <span class="label">姓名：</span><input type="text" ng-model="$ctrl.userinfo.realName" placeholder="请输入姓名"/><br>
+	             <span class="label">密码：</span><input type="text" ng-model="$ctrl.userinfo.password" placeholder="请输入密码"/><br>
+	             </div>
+                 <button class="btn btn-impo"   ng-click="$ctrl.updateTeacher()">确认</button>
+                 <button class="btn btn-impo"   ng-click="$ctrl.dismiss()">取消</button>      
+            </div>
+           <div id="popLayer"  ng-show="$ctrl.isShow2" >
+           </div>
+        </div>
+    </div>
+  <div>
+</div>
+</div>

@@ -1,0 +1,68 @@
+
+<div class="main-body">
+      <div class="tabs">
+        <a class="active" ui-sref="teacher.homeworkCreate"> 创建作业</a>
+        <a ui-sref="teacher.homeWorkHistory">查看我的作业</a>
+ 
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+                <span class="label">选择学科：</span>
+                <select  ng-model="$ctrl.currentSubject" ng-options="subject as subject.SubjectName for subject in $ctrl.subjectlist" >
+                </select>
+                 <label>作业名称</label>
+                     <input type="text" name="homeworkName" ng-model="$ctrl.homework.name" required>
+                 <label>完成时间</label>
+                    <input type="date" ng-model="$ctrl.homework.finishTime" md-placeholder="完成时间"></input>
+                 <span class="label">题目类型：</span>
+                 <select  ng-model="$ctrl.currentQuestion.type" ng-options="item as item.label for item in $ctrl.types" >
+                </select>
+            <div ng-messages="homeworkForm.title.$error">
+              <div ng-message="required">请输入题目</div>
+            </div>
+             <label>题目</label>
+            <input type="text" name="title" ng-model="$ctrl.currentQuestion.title" required>
+             <div ng-if="$ctrl.currentQuestion.type.value===1">
+              <label>选项A</label>
+              <input type="text" name="optionA" ng-model="$ctrl.currentQuestion.optionA" required>
+         
+                <div ng-message="required">请输入选项A</div>
+         
+              <label>选项B</label>
+              <input type="text" name="optionB" ng-model="$ctrl.currentQuestion.optionB" required>
+         
+                <div ng-message="required">请输入选项B</div>
+          
+         
+              <label>选项C</label>
+              <input type="text" name="optionC" ng-model="$ctrl.currentQuestion.optionC" required>
+                <div ng-message="required">请输入选项C</div>
+            
+              <label>选项D</label>
+              <input type="text" name="optionD" ng-model="$ctrl.currentQuestion.optionD" required>
+    
+                <div ng-message="required">请输入选项D</div>
+             
+                <input type="radio" name="answer" value="A" ng-model="$ctrl.currentQuestion.answer">A
+                <input type="radio" name="answer" value="B" ng-model="$ctrl.currentQuestion.answer">B
+                 <input type="radio" name="answer" value="C" ng-model="$ctrl.currentQuestion.answer">C
+                 <input type="radio" name="answer" value="D" ng-model="$ctrl.currentQuestion.answer">D
+          </div>
+          <div  ng-if="$ctrl.currentQuestion.type.value===2" >
+	        <label >答案</label>
+	        <input type="radio" name="answer" value="对" ng-model="$ctrl.currentQuestion.answer">对
+	        <input type="radio" name="answer" value="错" ng-model="$ctrl.currentQuestion.answer">错
+          </div>
+          <div  ng-if="$ctrl.currentQuestion.type.value===3">
+	        <label >答案</label>
+	        <input type="text" class="form-control"  ng-model="$ctrl.currentQuestion.answer">
+          </div>
+          <div>
+            <p>当前共{{$ctrl.questions.length}}道题</p>
+            <button class="btn" ng-click="$ctrl.createHomework()">创建作业</button>
+            <button class="btn" ng-click="$ctrl.upItem()">上一题</button>
+            <button class="btn" ng-click="$ctrl.createNextQuestion()">创建下一题</button>
+          </div>
+        </div>
+    </div>
+</div>

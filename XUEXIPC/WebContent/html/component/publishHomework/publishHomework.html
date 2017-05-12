@@ -1,0 +1,36 @@
+
+<header>
+    <div class="float-left">
+         <span >选择班级</span>
+        <a ui-sref="teacher.homeWorkHistory" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>班级列表</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+                   <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th></th>      
+                    <th>班级</th>        
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="item in $ctrl.classes">
+                        <td>
+                         <input type="checkbox" ng-model="item.isCheck" aria-label="checked?">
+                        </td>
+                        <td ng-bind="item.className"></td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+           <button class="btn btn-impo" ng-click="$ctrl.publish()">发布作业</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+
+<div class="main-body">
+    <div class="panel">
+         <div class="panel-header">
+            <div class="float-left">
+                 <button class="btn " ui-sref="login">返回登录</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form col2 clearfix">
+                <div class="form-item">
+                    <span class="label">学号</span>
+                    <span class="input">
+                         <input type="text"  placeholder="请输入用户名" name="school_number" ng-model="$ctrl.userInfo.school_number" required>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['school_number']"></span>
+                </div>
+                <div class="form-item  single-line">
+                    <span class="label">姓名</span>
+                    <span class="input">
+                        <input type="text" class="form-control" placeholder="请输入姓名" ng-model="$ctrl.userInfo.realName">
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['realName']"></span>
+                </div>
+         
+                <div class="form-item">
+                    <span class="label">密码</span>
+                    <span class="input">
+                        <input type="text" placeholder="请输入密码" ng-model="$ctrl.userInfo.password"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['password']"></span>
+                </div>
+                 <div class="form-item">
+                    <span class="label">确认密码</span>
+                    <span class="input">
+                        <input type="text" placeholder="确认密码" ng-model="$ctrl.userInfo.rePassword"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['password']"></span>
+                </div>
+                 <div class="form-item  single-line">
+                    <span class="label">学校</span>
+                    <span class="input">
+                        <input type="text" class="form-control" placeholder="请输入学校" ng-model="$ctrl.userInfo.school">
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['school']"></span>
+                </div>
+                  <div class="form-item">
+                    <span class="label">手机号</span>
+                    <span class="input">
+                        <input type="text" placeholder="请输入手机号码" ng-model="$ctrl.userInfo.telephone"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['telephone']"></span>
+                </div> 
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-impo" ng-click="$ctrl.register()">注册</button>
+            </div>
+            <span style="color:red">{{message}}</span>
+        </div>
+    </div>
+</div>
+

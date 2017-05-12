@@ -1,0 +1,40 @@
+
+<div class="main-body">
+  <div class="tabs">
+        <a  ui-sref="student.postQuestion">提问</a>
+        <a class="active" ui-sref="student.onlineQuestion">互动中心</a>
+        <a ui-sref="student.studentQuestionHistory">我的历史提问</a>
+    </div>
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <span class="label">选择班级：</span>
+                <select  ng-model="$ctrl.currentClass" ng-options="item as item.className for item in $ctrl.classes"  ng-change="$ctrl.getClassQuestion()">
+                </select>
+            </div>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                   <th>#</th>
+                    <th>学生</th>
+                    <th>时间</th>
+                     <th></th>
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="onlineQuesions in $ctrl.questionsList track by $index">
+                    <td ng-bind="index"></td>
+                    <td ng-bind="onlineQuesions.studentName"></td>
+                    <td ng-bind="onlineQuesions.createTime|date:'yyyy-MM-dd HH:mm:ss'"></td> 
+                    <td> 
+                        <a class="btn btn-default" ui-sref="student.studentOnlineAnswerDetail({'onlineQuestionsDetail':onlineQuesions,'currentClass':$ctrl.currentClass,'isHistroy':false})">查看详情</a>
+                    </td>
+                   </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

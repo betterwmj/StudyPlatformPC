@@ -1,0 +1,40 @@
+
+<div class="main-body">
+      <div class="tabs">
+        <a class="active" ui-sref="student.postQuestion">提问</a>
+        <a ui-sref="student.onlineQuestion">互动中心</a>
+        <a ui-sref="student.studentQuestionHistory">我的历史提问</a>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+               <span class="label">选择学科：</span>
+                <select  ng-model="$ctrl.currSubject" ng-options="subject.SubjectName for subject in $ctrl.subjectList" >
+                </select>
+                <span class="label">选择老师：</span>
+                <select  ng-model="$ctrl.currTeacher" ng-options="teacher.teacherName for teacher in $ctrl.currSubject.teacherList" >
+                </select>
+              <div class="form col2 clearfix">
+                <div class="form-item">
+                    <span class="label">标题</span>
+                    <span class="input">
+                        <input type="text" placeholder="标题" ng-model="$ctrl.title"/>
+                    </span>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['title']"></span>
+                </div>
+     
+                <div class="form-item">
+                     <label>内容</label>
+                     <textarea  rows="3" ng-model="$ctrl.content" name="content"></textarea>
+                    <span class="error-msg" ng-bind="$ctrl.errorMsg['content']"></span>
+                </div>
+              
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-impo" ng-click="$ctrl.postQuestion()">提问</button>
+            </div>
+            <span style="color:red">{{message}}</span>
+        </div>
+    </div>
+</div>

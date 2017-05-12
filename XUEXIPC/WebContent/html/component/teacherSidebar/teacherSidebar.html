@@ -1,0 +1,25 @@
+<nav>
+<header>
+        <a href="#" class="icon-button"><span class="icon icon-menu"></span></a>
+        <h1>我的学习平台</h1>
+    </header>
+    <section>
+        <div class="user-profile">
+            <img src="images/profile-small.jpg" alt="David Williams">
+            <h4 class="user-name">David Williams</h4>
+            <p class="user-title">Teacher <a href="#"><tophead></tophead></a></p>
+        </div>
+        <ul class="menu menu-icon">
+            <li ng-repeat="route in $ctrl.routers track by route.url" >
+                <a class="active" ui-sref="{{route.url}}" ui-sref-active="active" ng-bind="route.name">
+                  <span ng-class="route.icon"></span>
+                  <span class="icon icon-home"></span>      
+                </a>
+            </li>
+        </ul>
+    </section>
+    <footer>
+        Study Version Info<br>
+        Operation System Info
+    </footer>
+</nav>

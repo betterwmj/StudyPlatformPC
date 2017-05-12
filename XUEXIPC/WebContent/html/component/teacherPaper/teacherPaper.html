@@ -1,0 +1,80 @@
+ <div class="main-body">
+    <div class="tabs">
+        <a class="active" ui-sref="teacher.paperCreate">创建试卷</a>
+        <a ui-sref="teacher.publishPaper">查看试卷</a>
+    </div>
+    <div class="panel">
+    <div class="panel-header">
+        <div class="float-left">
+            <h3>题目列表</h3>
+        </div>
+        <div class="float-right">
+            <div class="form-item">
+                <span class="label">选择学科：</span>
+	                 <select  ng-model="$ctrl.currentSubject" ng-options="subject.SubjectName for subject in $ctrl.subjectlist" ng-change="$ctrl.getQuestionBySubject()">
+	                 </select>
+            </div>
+            <div class="form-item">
+                  <span class="label">题目类型：</span>
+	                 <select  ng-model="$ctrl.currentType" ng-options="item.label for item in $ctrl.types" ng-change="$ctrl.getQuestionByType()">
+	                 </select>
+            </div>
+            <div class="search-bar">
+               <span class="label">试卷名</span>
+               <input type="text" name="papername" ng-model="$ctrl.paper.papername" placeholder="请输入试卷名称">
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+                 <label>备选题目:</label>
+                <div ng-repeat="question in $ctrl.questions track by $index">
+                    <div ng-if="$ctrl.currentType.value === 1">
+                        <p>
+                        <span ng-bind="$index+1"></span>&nbsp;&nbsp;
+                        <span ng-bind="question.title"></span>
+                        </p>
+                        <div>
+                        <p>A.<span ng-bind="question.optionA"></span>&nbsp;&nbsp;</p>
+                        <p>B.<span ng-bind="question.optionB"></span>&nbsp;&nbsp;</p>
+                        <p>C.<span ng-bind="question.optionC"></span>&nbsp;&nbsp;</p>
+                        <p>D.<span ng-bind="question.optionD"></span>&nbsp;&nbsp;</p>
+                        <p>正确答案:<span ng-bind="question.answer"></span></p>
+                        <div layout="row">
+                            <input type="checkbox" ng-model="question.isChecked" ng-change="$ctrl.append(question)" aria-label="check question">
+                            <label >分数:</label>
+                            <input type="number" ng-model="question.score" ng-change="$ctrl.questionScoreChange(question)" required>
+                        
+                        </div>
+                        </div>
+                    </div>
+                    <div ng-if="$ctrl.currentType.value === 2" >
+                        <p ng-bind="question.title"></p>
+                        <p ng-bind="question.answer"></p>
+                        <div layout="row">
+                            <input type="checkbox" ng-model="question.isChecked" ng-change="$ctrl.append(question)" aria-label="check question">
+                            <label >分数:</label>
+                            <input type="number" ng-model="question.score" ng-change="$ctrl.questionScoreChange(question)" required>
+                        
+                        </div>
+                    </div>
+                    <div ng-if="$ctrl.currentType.value === 3" >
+                        <p ng-bind="question.title"></p>
+                        <p ng-bind="question.answer"></p>
+                        <div layout="row">
+                            <input type="checkbox" ng-model="question.isChecked" ng-change="$ctrl.append(question)" aria-label="check question">
+                            <label >分数:</label>
+                            <input type="number" ng-model="question.score" ng-change="$ctrl.questionScoreChange(question)" required>         
+                        </div>
+                  </div>
+                </div>
+          <div class="panel-footer">
+             <div class="float-right">
+                      <button class="btn" ng-click="$ctrl.pageChanged(-1)">上一页</button>
+                      <button class="btn" ng-click="$ctrl.pageChanged(1)">下一页</button>
+                      <button class="btn" ng-click="$ctrl.createPager()">创建试卷</button>
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+ 

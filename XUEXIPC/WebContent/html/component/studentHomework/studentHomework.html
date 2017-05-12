@@ -1,0 +1,16 @@
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-right">
+    
+            </div>
+        </div>
+        <div class="panel-body">
+             <div ng-repeat="item in $ctrl.subjects track by $index" ui-sref="student.studentHomeworkList({SubjectName:item.SubjectName,SubjectID:item.SubjectID})">
+              <div class="float-right">
+                <span ng-bind="item.SubjectName" ></span>
+              </div>
+        </div>
+        </div>
+    </div>
+</div>

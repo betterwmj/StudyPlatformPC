@@ -1,0 +1,27 @@
+<header>
+    <span>查看作业详情</span>
+    <div class="float-left">
+        <a ui-sref="teacher.homeWorkHistory" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-left">
+                <h3>作业详情</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="item in $ctrl.homeworkDetail">
+                   <p ng-bind="item.title"></p>
+			      <div ng-if="item.type === 1">
+			        <p>A.<span ng-bind="item.optionA"></span>&nbsp;&nbsp;</p>
+			        <p>B.<span ng-bind="item.optionB"></span>&nbsp;&nbsp;</p>
+			        <p>C.<span ng-bind="item.optionC"></span>&nbsp;&nbsp;</p>
+			        <p>D.<span ng-bind="item.optionD"></span>&nbsp;&nbsp;</p>
+			      </div>
+			      <p>正确答案:<span ng-bind="item.answer"></span></p>
+            </div>
+        </div>
+    </div>
+</div>

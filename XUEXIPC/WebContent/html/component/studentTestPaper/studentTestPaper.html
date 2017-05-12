@@ -1,0 +1,47 @@
+
+<header>
+      <span >答卷,{{$ctrl.paper.testName}}</span>
+    <div class="float-left">
+        <a ui-sref="student.studentTestPaperList({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,teacherID:$ctrl.subject.teacherID})" class="btn"><span class="icon icon-back"></span>返回</a>
+    </div>
+</header>
+<div class="main-body">
+    <div class="panel">
+        <div class="panel-header">
+            <div class="float-right">
+                    <p>试卷试题,共{{$ctrl.paperDetail.length}}道题,第{{$ctrl.questionIndex+1}}题</p>
+            </div>
+        </div>
+        <div class="panel-body">
+	          <p ng-bind="$ctrl.currQuestion.title"></p>
+		      <div ng-if="$ctrl.currQuestion.type === 1">
+		      <p>A.<span ng-bind="$ctrl.currQuestion.optionA"></span>&nbsp;&nbsp;</p>
+		      <p>B.<span ng-bind="$ctrl.currQuestion.optionB"></span>&nbsp;&nbsp;</p>
+		      <p>C.<span ng-bind="$ctrl.currQuestion.optionC"></span>&nbsp;&nbsp;</p>
+		      <p>D.<span ng-bind="$ctrl.currQuestion.optionD"></span>&nbsp;&nbsp;</p>
+		      <p>
+		        A<input name="options" type="radio" value="A" ng-model="$ctrl.currQuestion.studentAnswer">
+		        B<input name="options" type="radio" value="B" ng-model="$ctrl.currQuestion.studentAnswer">
+		        C<input name="options" type="radio" value="C" ng-model="$ctrl.currQuestion.studentAnswer">
+		        D<input name="options" type="radio" value="D" ng-model="$ctrl.currQuestion.studentAnswer">
+		      </p>
+		      </div>
+		      <div ng-if="$ctrl.currQuestion.type === 2">
+		        <p>
+					        对<input name="options" type="radio" value="对" ng-model="$ctrl.currQuestion.studentAnswer">
+					        错<input name="options" type="radio" value="错" ng-model="$ctrl.currQuestion.studentAnswer">
+		        </p>
+		       </div>
+              <div ng-if="$ctrl.currQuestion.type === 3">
+               
+                  <label>答案</label>
+                  <input type="text" name="studentAnswer" ng-model="$ctrl.currQuestion.studentAnswer" required>
+                  </div>
+                
+              </div>
+                <button class="btn" ng-click="$ctrl.changeIndex('up')">上一题</button>
+                <button class="btn" ng-click="$ctrl.changeIndex('down')">下一题</button>
+                <button class="btn" ng-click="$ctrl.submitResult()">提交答案</button>
+        </div>
+     </div>
+ 

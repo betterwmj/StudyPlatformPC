@@ -1,0 +1,42 @@
+
+<div class="main-body">
+    <div class="tabs">
+        <a class="active" ui-sref="teacher.teacherManagerClassCreate">创建班级</a>
+        <a ui-sref="teacher.teacherAssignStudent">分配班级</a>
+        <a ui-sref="teacher.UserInfo">个人信息</a>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+               <label>班级名称</label>
+	          <input type="text" name="className" ng-model="$ctrl.classInfo.className" required>
+	           <div ng-message="required">请输入班级名称</div>
+	          </div>
+	          <div class="form-item">
+                <span class="label">选择学科：</span>
+	                 <select  ng-model="$ctrl.currentSubject" ng-options="subject.SubjectName for subject in $ctrl.subjectlist">
+	                 </select>
+               </div>
+               <button class="btn" ng-click="$ctrl.create()">创建</button><br>
+                <span class="label">所在班级：</span>
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                   <th>#</th>
+                    <th>班级</th>
+                    <th>科目</th>
+                    <th></th>
+                </tr>
+                </thead>
+                 <tbody>
+                    <tr ng-repeat="item in $ctrl.classes">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="item.classes.className"></td>
+                        <td ng-bind="item.subjectName"></td>
+                        <td> 
+                        	<a class="btn" ui-sref="teacher.classStudent({'class':item.classId})">查看详情</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

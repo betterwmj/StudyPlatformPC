@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>登录 - 我爱学习网</title>
+	<link rel="stylesheet" type="text/css" href="style/register-login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="box"></div>
+<div class="cent-box">
+	<div class="cent-box-header">
+		<h1 class="main-title hide">我爱学习网</h1>
+		<h2 class="sub-title">和同学老师们一起分享学习的快乐</h2>
+	</div>
+
+	<div class="cont-main clearfix">
+		<div class="index-tab">
+			<div class="index-slide-nav">
+				<a href="login.html" class="active">登录</a>
+				<a href="register.jsp" class="active">注册</a>
+				<div class="slide-bar"></div>				
+			</div>
+		</div>
+		<form action="/XUEXI/servlet/treatUser" method="post">
+        <div class="login form">
+			<div class="group">
+			   <div class="group-ipt name">
+					<input type="text" name="name" id="name" class="ipt" placeholder="输入用户名" required>
+				</div>
+				<div class="group-ipt password">
+					<input type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码" required>
+				</div>
+				<input type="radio" name="denger" value="0" checked />学生
+				<input type="radio" name="denger" value="1"  />老师
+				
+			 </div>
+		</div>
+		<div class="button">
+			<button type="submit" class="login-btn register-btn" id="button">登录</button>
+			<input type="hidden" name="action" value="denglu" />
+		</div>
+       </form>		
+
+	</div>
+</div>
+
+<div class="footer">
+	<p>I LOVE STUDY 2017</p>
+</div>
+
+</body>
+</html>
