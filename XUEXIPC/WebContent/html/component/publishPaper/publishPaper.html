@@ -6,6 +6,7 @@
  
     </div>
     <div class="panel">
+      
         <div class="panel-header">
             <div class="float-left">
                 <h3>试卷列表</h3>
@@ -18,6 +19,7 @@
                     <th>试卷名称</th>
                     <th>创建时间</th>
                     <th>操作</th>
+                    <th></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -33,13 +35,15 @@
                        <button class="btn" ng-if="paper.status === 1"  ui-sref="teacher.paperResult({testpaperID:paper.testpaperID,testName:paper.testName})">查看</button>
                     </td>
                      <td>
-                      
                        <button class="btn"  ng-click="$ctrl.deletePaper(paper.testpaperID)">删除</button>
+                    </td>
+                     <td>
+                       <button class="btn"  ng-click="$ctrl.downloadPaper(paper.testpaperID)">生成试卷</button>
                     </td>
                  </tr>
                 </tbody>
             </table>
-
+             <a href="{{$ctrl.paperLink}}" download="a.txt" ng-show="$ctrl.isDownload">下载试卷</a>
         </div>
     </div>
 </div>

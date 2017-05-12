@@ -11,6 +11,8 @@ function controller($scope,$element,$state,$cookies,http){
   let vm = this;
   vm.papers = [];
   vm.msg = "";
+  vm.paperLink = null;
+  vm.isDownload =false;
   vm.$onInit = async function(){
     try {
       vm.papers = await http.get("GetPaper");
@@ -57,6 +59,21 @@ function controller($scope,$element,$state,$cookies,http){
 		        showErrMsg("删除失败");
 		      }
 	     }    
+  }
+  vm.downloadPaper =async function(paperId){
+	  let result = await http.get("DownLoadPaper",{paperID:paperId});
+	  vm.paperLink = result;
+      dialog.openDialog({
+          type: "normal",
+          title: "提示信息",
+          content: "试卷生成成功，文件路径如下：\n" +  vm.paperLink + "\n"
+      })
+      .then( (btn) => {
+          if (btn === "确定") {
+        	  vm.isDownload =true;
+          }
+      });
+	  
   }
   function showErrMsg(errMsg) {
 	     
