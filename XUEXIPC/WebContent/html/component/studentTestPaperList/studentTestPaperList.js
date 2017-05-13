@@ -90,6 +90,14 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
 	  $scope.className1 = true;
 	  $scope.className2 = false;
   }
+
+  async function showConfrimMsg(confirmMsg) {
+      return await dialog.openDialog({
+          type: "normal",
+          title: "操作提示",
+          content: confirmMsg
+      });
+  }
   function showErrMsg(errMsg) {
 	     
       dialog.openDialog({

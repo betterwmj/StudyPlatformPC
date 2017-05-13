@@ -7,10 +7,11 @@
         </div>
         <div class="panel-body">
              <div ng-repeat="item in $ctrl.subjects track by $index" ui-sref="student.studentTestPaperList({SubjectName:item.SubjectName,SubjectID:item.SubjectID,teacherID:item.teacherId})">
-              <div class="float-right">
+          
+                 <img src="images/xuexi.png"></img>
                 <span ng-bind="item.SubjectName" ></span>
-              </div>
-        </div>
+              
+             </div>
         </div>
     </div>
 </div>
