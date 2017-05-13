@@ -16,7 +16,7 @@
 	        <div ng-repeat="reply in $ctrl.replyList" ng-click="$ctrl.deleleReply(reply.id,reply.answerId)">
 	            <label>{{reply.realName}}:</label>
 	            <span ng-bind="reply.answer"></span>
-	               <img width="50" height ="50" ng-show="reply.img!==null&&reply.img!==''" ng-attr-src="{{reply.img}}" alt=""/> 
+	               <img width="50" height ="50" ng-show="reply.img!==null&&reply.img!==''" ng-attr-src="{{reply.img}}"  ng-click="$ctrl.goToImgUrl(reply.img)"  alt=""/> 
 	                                     回复时间<span ng-bind="reply.answerTime|date:'yyyy-MM-dd HH:mm:ss'"></span>
 	        </div>
 	      <button type="button" class="btn btn-default" ng-click="$ctrl.reply()">回复</button><br>

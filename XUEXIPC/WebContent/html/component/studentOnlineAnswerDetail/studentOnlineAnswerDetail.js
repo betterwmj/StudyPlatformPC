@@ -78,6 +78,10 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 		   }
 	      
 	  }
+	  vm.goToImgUrl=function(img){
+		  $state.go(img);
+	  }
+	  
    async  function reply(){	
 	   let content =vm.answerContent;
 	   if(content ===null || content==="" ||content ===undefined){
