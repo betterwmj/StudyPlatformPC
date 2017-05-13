@@ -11,7 +11,7 @@
 	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionTitle"></span><br>
 	        <label>提问者{{$ctrl.onlineQuesionsDetail.studentName}}:</label>
 	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionContent"></span><br>
-	         <img width="50" height ="50" ng-show="$ctrl.onlineQuesionsDetail.img!==null&&$ctrl.onlineQuesionsDetail.img!=''" ng-attr-src="{{$ctrl.onlineQuesionsDetail.img}}" alt=""/> 
+	         <img width="50" height ="50" ng-show="$ctrl.onlineQuesionsDetail.img!==null&&$ctrl.onlineQuesionsDetail.img!=''" ng-click="$ctrl.goToImgUrl($ctrl.onlineQuesionsDetail.img)" ng-attr-src="{{$ctrl.onlineQuesionsDetail.img}}" alt=""/> 
 	        <p>回复:
 	        <div ng-repeat="reply in $ctrl.replyList" >
 	            <label>{{reply.realName}}:</label>
