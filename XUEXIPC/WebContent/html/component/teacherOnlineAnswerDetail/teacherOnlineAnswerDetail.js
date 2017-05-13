@@ -134,6 +134,7 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
        } 
 	   try {
 		   let imgResult = await http.submitForm("UploadImage",formData);
+		   showErrMsg("上传图片成功");
 	   } catch (error) {
 		   console.log(error);
 		   showErrMsg("上传图片失败");
