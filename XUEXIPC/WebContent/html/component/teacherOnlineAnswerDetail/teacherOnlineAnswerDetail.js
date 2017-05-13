@@ -141,11 +141,13 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
            formData.append("img"+i,file[i]);
        } 
 	   try {
+
 		   if(file.length!=0){
 			   let imgResult = await http.submitForm("UploadImage",formData);
 			   vm.imgUrl =imgResult;
 			}
 		   postReply();
+
 	   } catch (error) {
 		   console.log(error);
 		   showErrMsg("上传图片失败");
