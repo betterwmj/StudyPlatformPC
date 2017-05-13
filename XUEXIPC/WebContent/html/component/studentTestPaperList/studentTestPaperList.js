@@ -19,6 +19,8 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
   vm.isShowFinish =false;
   $scope.className1 = true;
   $scope.className2 = false;
+  vm.paperLink = null;
+  vm.isDownload =false;
   vm.$onInit = async function(){
     vm.subject = {
         SubjectName:$stateParams.SubjectName,
@@ -90,7 +92,21 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
 	  $scope.className1 = true;
 	  $scope.className2 = false;
   }
-
+  vm.downloadPaper =async function(paperId){
+	  let result = await http.get("DownLoadPaper",{paperID:paperId});
+	  vm.paperLink = result;
+      dialog.openDialog({
+          type: "normal",
+          title: "提示信息",
+          content: "试卷生成成功，文件路径如下：\n" +  vm.paperLink + "\n"
+      })
+      .then( (btn) => {
+          if (btn === "确定") {
+        	  vm.isDownload =true;
+          }
+      });
+	  
+  }
   async function showConfrimMsg(confirmMsg) {
       return await dialog.openDialog({
           type: "normal",

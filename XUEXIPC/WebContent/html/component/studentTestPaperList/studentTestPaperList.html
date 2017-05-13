@@ -24,6 +24,7 @@
                     <th>试卷名称</th>
                     <th>创建时间</th>
                     <th>更多详情</th>
+                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,8 +35,12 @@
                     <td>
                         <button  ui-sref="student.studentTestPaper({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,testpaperID:paper.testpaperID,testName:paper.testName})" type="button" class="btn btn-impo">进行测试</button>
                     </td>
-              
+                    <td>
+                       <button class="btn"  ng-click="$ctrl.downloadPaper(paper.testpaperID)">生成试卷</button>
+                        <a href="{{$ctrl.paperLink}}" download="a.txt" ng-show="$ctrl.isDownload">下载试卷</a>
+                    </td>
                 </tbody>
+                
             </table>
               <span ng-show="$ctrl.isShowFinish">已作答{{$ctrl.paperFinish.length}}</span>     
               <table class="table table-bordered" ng-show="$ctrl.isShowFinish">
@@ -45,6 +50,7 @@
                     <th>试卷名称</th>
                     <th>创建时间</th>
                     <th>更多详情</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,9 +61,14 @@
                     <td>
                         <button  ui-sref="student.studentTestPaperResultDetail({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,teacherID:$ctrl.subject.teacherID,testpaperID:paper.testpaperID,paperResultID:paper.resultObj.paper.id})" type="button" class="btn btn-impo">查看更多</button>
                     </td>
-                 
+                     <td>
+                       <button class="btn"  ng-click="$ctrl.downloadPaper(paper.testpaperID)">生成试卷</button>
+                         <a href="{{$ctrl.paperLink}}" download="a.txt" ng-show="$ctrl.isDownload">下载试卷</a>
+                    </td>
                 </tbody>
+                 
             </table>
+            
         </div>
     </div>
 </div>
