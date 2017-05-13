@@ -22,6 +22,8 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	    onlineQuesionsDetail =vm.onlineQuesionsDetail;
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
+	    vm.userinfo = $cookies.getObject("userInfo");
+	    vm.userinfoId =parseInt("10", vm.userinfo.id);
 	    getQuestionReply();
 	    setTimeout(function(){
             let imgInputs = findImgInput();
@@ -32,7 +34,9 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	   vm.isShow = true;
 	   vm.msg="";
    }
- 
+   vm.goToImgUrl=function(img){
+		  window.open(img);
+	  }
   async function postReply(){	
 	  let content =vm.answerContent;
 	   if(content ===null || content==="" ||content ===undefined){

@@ -15,11 +15,14 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	vm.onlineQuesionsDetail =null;
 	vm.currentClass=null;
 	vm.isHistroy =null;
-	 vm.imgUrl=null;
+    vm.imgUrl=null;
+	vm.userinfo = null;
 	function init(){ 
 	    vm.onlineQuesionsDetail = $stateParams.onlineQuestionsDetail; 
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
+	    vm.userinfo = $cookies.getObject("userInfo");
+	    vm.userinfoId =parseInt("10", vm.userinfo.id);
 	    getQuestionReply();
 	    setTimeout(function(){
 	        let imgInputs = findImgInput();
@@ -79,7 +82,7 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	      
 	  }
 	  vm.goToImgUrl=function(img){
-		  $state.go(img);
+		  window.open(img);
 	  }
 	  
    async  function reply(){	
@@ -141,8 +144,8 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	   }   
    }
    vm.deleleReply = async function(replyId,answerId){
-	   let userinfo = $cookies.getObject("userInfo");
-		   if(parseInt("10", userinfo.id) === answerId){
+	     
+		   if(parseInt("10", vm.userinfo.id) === answerId){
 			   let comfirm =await showConfrimMsg("是否删除此条回复?");
 			   if(comfirm==="确定"){
 				   let result= await http.get('DeleteReply',{ReplyID:replyId});

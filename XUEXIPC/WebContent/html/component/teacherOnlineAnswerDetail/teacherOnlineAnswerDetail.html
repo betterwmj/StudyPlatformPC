@@ -12,11 +12,12 @@
 	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionContent"></span><br>
 	        <img width="50" height ="50" ng-show="$ctrl.onlineQuesionsDetail.img!==null&&$ctrl.onlineQuesionsDetail.img!=''" ng-attr-src="{{$ctrl.onlineQuesionsDetail.img}}" alt=""/> 
 	        <p>回复:
-	        <div ng-repeat="reply in $ctrl.replyList" ng-click="$ctrl.deleleReply(reply.id,reply.answerId)">
+	        <div ng-repeat="reply in $ctrl.replyList">
 	            <label>{{reply.realName}}:</label>
 	            <span ng-bind="reply.answer"></span>
-	            <img width="50" height ="50" ng-show="reply.img!==null&&reply.img!==''" ng-attr-src="{{reply.img}}" alt=""/> 
+	            <img width="20" height ="20" ng-show="reply.img!==null&&reply.img!==''" ng-click="$ctrl.goToImgUrl(reply.img)"  ng-attr-src="{{reply.img}}" alt=""/> 
 	                                      回 复 时间<span ng-bind="reply.answerTime|date:'yyyy-MM-dd HH:mm:ss'"></span>
+	            <span class="icon icon-trash" ng-show="$ctrl.userinfoId===reply.answerId" ng-click="$ctrl.deleleReply(reply.id,reply.answerId)"></span>
 	        </div>
 	      <button type="button" class="btn btn-default" ng-click="$ctrl.reply()">回复</button><br>
 	      <div ng-show="$ctrl.isShow">
