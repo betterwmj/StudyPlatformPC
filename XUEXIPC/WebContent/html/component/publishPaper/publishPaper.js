@@ -69,9 +69,10 @@ function controller($scope,$element,$state,$cookies,http){
           content: "试卷生成成功，文件路径如下：\n" +  vm.paperLink + "\n"
       })
       .then( (btn) => {
-          if (btn === "确定") {
-        	  vm.isDownload =true;
-          }
+          let downLink = document.getElementById("download_paper");
+          let event = document.createEvent("MouseEvents"); 
+          event.initEvent("click", false, false); 
+          downLink.dispatchEvent(event);
       });
 	  
   }

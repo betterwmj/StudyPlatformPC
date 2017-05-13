@@ -3,13 +3,42 @@ export default function httpService(app){
 }
 
 function serviceFunc($q,$http,$httpParamSerializerJQLike,$rootScope,$mdDialog){
-  const baseUrl = "http://192.168.191.4:8080/XUEXI/";
+  const baseUrl = "http://localhost:8080/XUEXI/";
   let service = {
     post:post,
     get:get,
-   
+    submitForm:submitForm
   };
 
+  async function submitForm(url,data){
+     url = baseUrl + url;
+     let deferred = $q.defer();
+     let response = null;
+     try {
+        response = await $http({
+          method: 'POST',
+          url: url,
+          data: data,
+          headers: { 'Content-Type': undefined},
+          transformRequest: angular.identity
+        });
+        let result = response.data;
+        if( result.code === 0 ){
+          deferred.resolve(result.data);
+        }else{
+          deferred.reject(result.message);
+        }
+      } catch (error) {
+        console.log(error);
+        deferred.reject("操作失败");
+      }finally{
+        window.setTimeout(function(){
+          $rootScope.$applyAsync(null);
+        },0);
+     }
+     return deferred.promise;
+  }
+  
   async function post(url,data,headers){
     url = baseUrl + url;
     headers = headers || {};

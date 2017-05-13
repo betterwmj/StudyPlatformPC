@@ -129,11 +129,16 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
            } 
        }
        let formData = new FormData();
-       for(var i=0;i<imgs.length;i++){
-           formData.append("img"+i,imgs[i]);
+       for(var i=0;i<file.length;i++){
+           formData.append("img"+i,file[i]);
        } 
-       console.log(imgs[i]);
-       let imgResult = await http.post("UploadImage",formData);
+	   try {
+		   let imgResult = await http.submitForm("UploadImage",formData);
+	   } catch (error) {
+		   console.log(error);
+		   showErrMsg("上传图片失败");
+	   }
+       
    }
    function onSelectImg(event){
        let parentElement=event.target.parentNode;
