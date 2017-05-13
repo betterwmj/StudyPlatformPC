@@ -15,6 +15,7 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	vm.onlineQuesionsDetail =null;
 	vm.currentClass=null;
 	vm.isHistroy =null;
+	vm.imgUrl=null;
 	let  onlineQuesionsDetail=null;
 	function init(){ 
 	    vm.onlineQuesionsDetail = $stateParams.onlineQuestionsDetail; 
@@ -31,10 +32,17 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	   vm.isShow = true;
 	   vm.msg="";
    }
-   vm.sure=async function(){	
-	   let userInfo = $cookies.getObject("userInfo");
+ 
+  async function postReply(){	
+	  let content =vm.answerContent;
+	   if(content ===null || content==="" ||content ===undefined){
+		   showErrMsg("请输入内容");
+		   return;
+	   }
+	  let userInfo = $cookies.getObject("userInfo");
 	   let data = {
 		  answer:vm.answerContent,
+		  img:vm.imgUrl,
 		  questionID:$stateParams.onlineQuestionsDetail.id,
 		  answerID:userInfo.id,
 		  type:userInfo.type
@@ -119,7 +127,7 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
    function findImgInput(){
        return angular.element(document.getElementsByClassName("js_product_imgs"));
    }
-   vm.uploadImg = async function(){
+   vm.replyQuestion = async function(){
 	   let imgs=[];
        imgs = findImgInput();
        let file=[];
@@ -133,7 +141,11 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
            formData.append("img"+i,file[i]);
        } 
 	   try {
-		   let imgResult = await http.submitForm("UploadImage",formData);
+		   if(file.length!=0){
+			   let imgResult = await http.submitForm("UploadImage",formData);
+			   vm.imgUrl =imgResult;
+			}
+		   postReply();
 	   } catch (error) {
 		   console.log(error);
 		   showErrMsg("上传图片失败");

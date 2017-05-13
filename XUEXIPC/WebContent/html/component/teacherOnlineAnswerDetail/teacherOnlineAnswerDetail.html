@@ -10,26 +10,27 @@
 	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionTitle"></span><br>
 	        <label>提问者{{$ctrl.onlineQuesionsDetail.studentName}}:</label>
 	        <span ng-bind="$ctrl.onlineQuesionsDetail.questionContent"></span><br>
+	        <img width="50" height ="50" ng-show="$ctrl.onlineQuesionsDetail.img!==null&&$ctrl.onlineQuesionsDetail.img!=''" ng-attr-src="{{$ctrl.onlineQuesionsDetail.img}}" alt=""/> 
 	        <p>回复:
 	        <div ng-repeat="reply in $ctrl.replyList" ng-click="$ctrl.deleleReply(reply.id,reply.answerId)">
 	            <label>{{reply.realName}}:</label>
 	            <span ng-bind="reply.answer"></span>
+	            <img width="50" height ="50" ng-show="reply.img!==null&&reply.img!==''" ng-attr-src="{{reply.img}}" alt=""/> 
 	                                      回 复 时间<span ng-bind="reply.answerTime|date:'yyyy-MM-dd HH:mm:ss'"></span>
 	        </div>
 	      <button type="button" class="btn btn-default" ng-click="$ctrl.reply()">回复</button><br>
 	      <div ng-show="$ctrl.isShow">
 		      <textarea rows="8" cols="35" ng-model="$ctrl.answerContent"></textarea><br>
-		      <button type="button" class="btn btn-default" ng-click="$ctrl.sure()">确认</button>
 		      <p ng-bind="$ctrl.msg"></p>
 	      </div>
-	       <div class="form-item single-line">
+	       <div class="form-item single-line"  ng-show="$ctrl.isShow">
                     <span class="label">图片</span>
                     <span class="file clearfix">
                             <input type="file" accept="image/*"  class="js_product_imgs">
-                            <img width="200" height ="300" ng-attr-src="{{img.src}}" alt=""/>
-                            <button class="btn" type="button" ng-click="$ctrl.uploadImg()">上传</button>
+                            <img width="80" height ="100" ng-attr-src="{{img.src}}" alt=""/>        
                     </span>
-              </div>
+            </div>
+             <button class="btn" type="button" ng-click="$ctrl.replyQuestion()">提交</button>
         </div>
     </div>
 </div>

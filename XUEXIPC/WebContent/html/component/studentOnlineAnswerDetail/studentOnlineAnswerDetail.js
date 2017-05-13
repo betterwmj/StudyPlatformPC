@@ -15,21 +15,80 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	vm.onlineQuesionsDetail =null;
 	vm.currentClass=null;
 	vm.isHistroy =null;
+	 vm.imgUrl=null;
 	function init(){ 
 	    vm.onlineQuesionsDetail = $stateParams.onlineQuestionsDetail; 
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
 	    getQuestionReply();
+	    setTimeout(function(){
+	        let imgInputs = findImgInput();
+	        imgInputs.eq(0).bind("change",onSelectImg);
+	    },0);
    }
    vm.reply=function(){
 	   vm.isShow = true;
 	   vm.msg="";
    }
-   vm.sure=async function(){	
+   function findImgInput(){
+	      return angular.element(document.getElementsByClassName("js_product_imgs"));
+	  }
+	  function onSelectImg(event){
+	      let parentElement=event.target.parentNode;
+	      let img=null;
+	      for(let i=0;i<parentElement.children.length;i++){
+	          if(parentElement.children[i].nodeName==="IMG"){
+	              img=parentElement.children[i];
+	          }
+	      }
+	      let files=event.target.files;
+	      if( files.length === 0 ){
+	          img.src="";
+	          return;
+	      }
+	      let file = files[0];
+	      let reader = new FileReader();
+	      reader.onload = function(e) { 
+	          img.src = e.target.result;
+	      }; 
+	      reader.readAsDataURL(file);
+	  }
+	  vm.sure = async function(){
+		   let imgs=[];
+	      imgs = findImgInput();
+	      let file=[];
+	      for(var i=0;i<imgs.length;i++){
+	          if(imgs[i].files[0]!==undefined){
+	               file.push(imgs[i].files[0]);
+	          } 
+	      }
+	      let formData = new FormData();
+	      for(var i=0;i<file.length;i++){
+	          formData.append("img"+i,file[i]);
+	      } 
+		   try {
+			   if(file.length!=0){
+				   let imgResult = await http.submitForm("UploadImage",formData);
+				   vm.imgUrl =imgResult;
+				}
+			   reply();
+		   } catch (error) {
+			   console.log(error);
+			   showErrMsg("上传图片失败");
+		   }
+	      
+	  }
+   async  function reply(){	
+	   let content =vm.answerContent;
+	   if(content ===null || content==="" ||content ===undefined){
+		   showErrMsg("请输入内容");
+		   return;
+	   }
 	   let userInfo = $cookies.getObject("userInfo");
 	   let data = {
 		  answer:vm.answerContent,
 		  questionID:$stateParams.onlineQuestionsDetail.id,
+		  img:vm.imgUrl,
 		  answerID:userInfo.id,
 		  type:userInfo.type
 	   };
