@@ -58,7 +58,7 @@ function controller($scope,$element,$state,$cookies,http){
       try {
           result = await http.post("Login",userData);
       } catch (error) {
-          showErrMsg("登录失败");
+          showErrMsg("用户名或密码错误");
         return;
       }
       if( vm.remember ){
@@ -71,7 +71,7 @@ function controller($scope,$element,$state,$cookies,http){
 
         }else if(userData.type === 1){
           $cookies.putObject("userInfo",result);
-          $state.go("teacher.paper");
+          $state.go("teacher.paperCreate");
         }else{
         	$cookies.putObject("userInfo",result);
             $state.go("admin.center");
