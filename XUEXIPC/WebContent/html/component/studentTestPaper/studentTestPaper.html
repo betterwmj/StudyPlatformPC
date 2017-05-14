@@ -2,7 +2,7 @@
 <header>
       <span >答卷,{{$ctrl.paper.testName}}</span>
     <div class="float-left">
-        <a ui-sref="student.studentTestPaperList({SubjectName:$ctrl.subject.SubjectName,SubjectID:$ctrl.subject.SubjectID,teacherID:$ctrl.subject.teacherID})" class="btn"><span class="icon icon-back"></span>返回</a>
+        <a ng-click="$ctrl.goBack()" class="btn"><span class="icon icon-back"></span>返回</a>
     </div>
 </header>
 <div class="main-body">
