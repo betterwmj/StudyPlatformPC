@@ -10,17 +10,33 @@ export default function root(app){
 function controller($scope,$element,$state,$cookies,http){
   let vm = this;
   vm.msg = "";
+  let result=null;
   vm.$onInit = async function(){
-    try {
-      vm.userInfo = $cookies.getObject("userInfo");
-      vm.classes = await http.get("GetTeacherClasses");
-      if( vm.classes.length > 0){
-        vm.currentClass =  vm.classes[0];;
-      }
-      vm.students = await http.get("GetStudents");
-    } catch (error) {
-      showErrMsg("加载数据异常");
-    }
+	  getStudents();
+  }
+  async function getStudents(){
+	  try {
+	      vm.userInfo = $cookies.getObject("userInfo");
+	      vm.classes = await http.get("GetTeacherClasses");
+	      if( vm.classes.length > 0){
+	        vm.currentClass =  vm.classes[0];;
+	      }
+	      result = await http.get("GetStudents");
+	      vm.students=result;
+	    } catch (error) {
+	      showErrMsg("加载数据异常");
+	    }
+  }
+  vm.search = async function(){
+	  if( vm.user_number ==="" ||vm.user_number ===undefined){
+		  getStudents();
+	  }else{
+		  let result= await http.get("GetUserInfoByName",{user_number:vm.user_number,type:0});
+		  vm.students.splice(0,vm.students.length);
+		  vm.students.push(result);
+	  }
+	  
+	  
   }
   vm.toAssign = async function(){
     vm.msg = "";

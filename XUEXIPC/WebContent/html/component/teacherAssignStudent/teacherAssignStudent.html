@@ -12,6 +12,11 @@
                 <select  ng-model="$ctrl.currentClass" ng-options="item as item.classes.className for item in $ctrl.classes">
                 </select>
             </div>
+             <div class="search-bar">
+                     <span class="label">查询：</span>
+                    <input type="text"  ng-model="$ctrl.user_number" placeholder="请输入学号"/>
+                    <a href="javascript:;" class="form-item-button" ng-click="$ctrl.search()"><span class="icon icon-search"></span></a>
+              </div>
         </div>
         <div class="panel-body">
                 <table class="table table-bordered">
