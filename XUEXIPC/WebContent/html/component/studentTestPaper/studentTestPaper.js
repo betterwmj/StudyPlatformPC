@@ -99,6 +99,21 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       showErrMsg("提交答案失败");
     }
   }
+
+  vm.goBack = function(){
+    dialog.openDialog({
+        type: "normal",
+        title: "提示",
+        content: "是否放弃作答?"
+    })
+    .then(function(btn){
+      if( btn === '确定'){
+        $state.go("student.studentTestPaperList",{
+          SubjectName:vm.subject.SubjectName,SubjectID:vm.subject.SubjectID,teacherID:vm.subject.teacherID
+        });
+      }
+    });
+  }
   function showErrMsg(errMsg) {
 	     
       dialog.openDialog({
