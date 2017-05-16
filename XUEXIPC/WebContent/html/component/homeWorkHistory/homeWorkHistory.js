@@ -4,23 +4,43 @@ export let name = "homeWorkHistory";
 export default function root(app){
   app.component(name,{
     templateUrl:"./component/homeWorkHistory/homeWorkHistory.html",
-    controller:["$scope","$element","$state",'$cookies',"http",controller]
+    controller:["$scope","$element","$state",'$cookies',"http","$stateParams",controller]
   });
 }
-function controller($scope,$element,$state,$cookies,http){
+function controller($scope,$element,$state,$cookies,http,$stateParams,){
   let vm = this;
+  vm.currentPage=1;
+  vm.pageItems =4;
+  vm.maxSize = 5;
+  vm.totalItems =0;
   vm.$onInit = async function(){
-    try {
-      vm.homeworks = await http.get("GetHomework");
-      vm.homeworks.forEach( (item)=>{
-        if( item.finishTime ){
-          item.finishTime = new Date(item.finishTime.time);
-        }
-      });
-    } catch (error) {
-    
-      showErrMsg("获取作业列表异常");
-    }
+	  if( $stateParams.currentPage !=null){
+		  vm.currentPage = $stateParams.currentPage;
+		     vm.pageItems = $stateParams.pageItems;
+		     vm.totalItems = $stateParams.totalItems;
+	  }
+	  getHomework();
+  }
+  vm.pageChanged=function(){
+	  getHomework();
+  }
+  async function getHomework(){
+	  try {
+	      vm.homeworks = await http.get("GetHomework",{
+	    	  currentPage:vm.currentPage,
+			  pageItems:vm.pageItems
+	      });
+	      if( vm.homeworks.length!==0){
+	          vm.totalItems =vm.homeworks[0].count;
+	      }
+	      vm.homeworks.forEach( (item)=>{
+	        if( item.finishTime ){
+	          item.finishTime = new Date(item.finishTime.time);
+	        }
+	      });
+	    } catch (error) {
+	    	showErrMsg("获取作业列表异常");
+	    }
   }
   vm.deleteHomeWork =async function(homeId){
 	  let confirm =await showConfrimMsg("是否删除该作业?");

@@ -366,10 +366,13 @@ export function routerConfig($stateProvider){
 			},
 			{
 				name:"teacher.homeworkDetail",
-				url: '/homeworkDetail/{homeworkId}/{homeWorkName}',
+				url: '/homeworkDetail',
 				params:{
 					homeWorkName:null,
-					homeworkId:null
+					homeworkId:null,
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
 				},
 				views:{
 					"head@":{
@@ -447,6 +450,12 @@ export function routerConfig($stateProvider){
 			{
 				name:"teacher.homeWorkHistory",
 				url: '/homeWorkHistory',
+				params:{
+		
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
+				},
 				views:{
 					"head@":{
 						component:"teacherSidebar"
@@ -458,10 +467,13 @@ export function routerConfig($stateProvider){
 			},
 			{
 				name:"teacher.publishHomework",
-				url: '/publishHomework/{homeworkId}/{subjectId}',
+				url: '/publishHomework',
 				params:{
 					homeworkId:null,
-					subjectId:null
+					subjectId:null,
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
 				},
 				views:{
 					"head@":{
@@ -474,10 +486,13 @@ export function routerConfig($stateProvider){
 			},
 			{
 				name:"teacher.teacherHomeworkResultList",
-				url: '/teacherHomeworkResultList/{homeworkId}/{homeWorkName}',
+				url: '/teacherHomeworkResultList',
 				params:{
 					homeworkId:null,
 					homeWorkName:null,
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
 				},
 				views:{
 					"head@":{

@@ -1,7 +1,7 @@
 <header>
     <span>查看作业详情</span>
     <div class="float-left">
-        <a ui-sref="teacher.homeWorkHistory" class="btn"><span class="icon icon-back"></span>返回</a>
+        <a ui-sref="teacher.homeWorkHistory({currentPage:$ctrl.currentPage,pageItems:$ctrl.pageItems,totalItems:$ctrl.totalItems})" class="btn"><span class="icon icon-back"></span>返回</a>
     </div>
 </header>
 <div class="main-body">

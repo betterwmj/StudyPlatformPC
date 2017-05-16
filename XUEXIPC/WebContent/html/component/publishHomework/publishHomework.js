@@ -14,6 +14,9 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
     vm.homework = {
       homeId:$stateParams.homeworkId
     };
+    vm.currentPage = $stateParams.currentPage;
+  	vm.pageItems = $stateParams.pageItems;
+  	vm.totalItems = $stateParams.totalItems;
     vm.subjectId = $stateParams.subjectId;
     try {
       vm.classes = await http.get("GetTeacherSubjectClass",{subjectId:vm.subjectId});
