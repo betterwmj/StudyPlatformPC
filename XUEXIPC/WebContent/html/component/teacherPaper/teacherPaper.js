@@ -17,9 +17,12 @@ function controller($scope,$element,$state,$cookies,http){
   vm.currentType = vm.types[0];
   vm.questions = [];
   vm.allQuestion = [];
-  vm.currentPage = 1;
-  vm.pageItem = 3;
+  vm.currentPage=1;
+  vm.pageItems =4;
+  vm.maxSize = 5;
+  vm.totalItems =20;
   vm.msg = "";
+
   vm.currentSubject = null;
   vm.subjectlist =null;
   vm.$onInit = async function(){
@@ -39,6 +42,9 @@ function controller($scope,$element,$state,$cookies,http){
     papername:new Date().toLocaleString(),
     papertitles:[]
   };
+  vm.pageChanged=function(){
+	  getQuestions();
+  }
   vm.createPager = async function(){
     vm.msg = "";
     let count = vm.paper.papertitles.length;
@@ -67,22 +73,14 @@ function controller($scope,$element,$state,$cookies,http){
   };
   vm.getQuestionByType = async function(){
 	  if( vm.subjectlist.length!==0){
-		  let rs = await getQuestions(vm.currentSubject.SubjectID,vm.currentType.value);
+		  let rs = await getQuestions();
 	  } 
   }
   vm.getQuestionBySubject =async function(){
 	  if( vm.subjectlist.length!==0){
-	    let rs = await getQuestions(vm.currentSubject.SubjectID,vm.currentType.value);
+	    let rs = await getQuestions();
 	  }
   }
-  vm.pageChanged = function(step){
-    let pageCount = Math.ceil(vm.allQuestion.length/vm.pageItem);
-    if( vm.currentPage + step <= 0 || vm.currentPage + step > pageCount ){
-      return;
-    }
-    vm.currentPage = vm.currentPage + step ;
-    getData();
-  };
 
   vm.append = function(question){
     if( question.isChecked === true ){
@@ -118,40 +116,32 @@ function controller($scope,$element,$state,$cookies,http){
     });
   }
 
-  async function getQuestions(subjectId,value){
+  async function getQuestions(){
     let result = null;
     try {
       result = await http.get("GetQuestions",{
-    	subjectId:subjectId,
-        type:value
+    	  subjectId:vm.currentSubject.SubjectID,
+          type:vm.currentType.value,
+          currentPage:vm.currentPage,
+  		  pageItems:vm.pageItems
+        
       });
       vm.allQuestion = result;
+      if( vm.allQuestion.length!==0)
+         vm.totalItems =vm.allQuestion[0].count;
       mergeData();
       vm.allQuestion.forEach( (item)=>{
         if( "score" in item === false ){
           item.score = 5;
         }
       });
-      getData();
-      
+    
     } catch (error) {
       showErrMsg("获取题目数据异常");
     }
     return result;
   }
 
-  function getData(){
-    let newData = [];
-    let start = (vm.currentPage-1)*vm.pageItem;
-    for(let i = start; i < start+vm.pageItem; ++i){
-      if( i >= vm.allQuestion.length ){
-        vm.questions = newData;
-        return;
-      }
-      newData.push( vm.allQuestion[i]);
-    }
-    vm.questions = newData;
-  }
   function showErrMsg(errMsg) {
 	     
       dialog.openDialog({

@@ -282,6 +282,12 @@ export function routerConfig($stateProvider){
 			{
 				name:"teacher.publishPaper",
 				url: '/publishPaper',
+	            params:{
+					
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
+				},
 				views:{
 					"head@":{
 						component:"teacherSidebar"
@@ -293,10 +299,13 @@ export function routerConfig($stateProvider){
 			},
 			{
 				name:"teacher.paperDetail",
-				url: '/paperDetail/{testpaperID}/{testName}',
+				url: '/paperDetail',
 				params:{
 					testpaperID:null,
 					testName:null,
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
 				},
 				views:{
 					"head@":{
@@ -309,10 +318,13 @@ export function routerConfig($stateProvider){
 			},
 			{
 				name:"teacher.paperResult",
-				url: '/paperResult/{testpaperID}/{testName}',
+				url: '/paperResult',
 				params:{
 					testpaperID:null,
 					testName:null,
+					currentPage:null,
+					pageItems:null,
+					totalItems:null
 				},
 				views:{
 					"head@":{

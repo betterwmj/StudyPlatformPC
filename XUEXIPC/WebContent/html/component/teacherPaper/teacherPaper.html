@@ -27,7 +27,7 @@
     </div>
     <div class="panel-body">
                  <label>备选题目:</label>
-                <div ng-repeat="question in $ctrl.questions track by $index">
+                <div ng-repeat="question in $ctrl.allQuestion track by $index">
                     <div ng-if="$ctrl.currentType.value === 1">
                         <p>
                         <span ng-bind="$index+1"></span>&nbsp;&nbsp;
@@ -67,13 +67,13 @@
                         </div>
                   </div>
                 </div>
-          <div class="panel-footer">
-             <div class="float-right">
-                      <button class="btn" ng-click="$ctrl.pageChanged(-1)">上一页</button>
-                      <button class="btn" ng-click="$ctrl.pageChanged(1)">下一页</button>
-                      <button class="btn" ng-click="$ctrl.createPager()">创建试卷</button>
-              </div>
-        </div>
+         <div class="table-footer">
+                <div class="float-right">
+                    <ul class="pager" uib-pagination total-items="$ctrl.totalItems" ng-model="$ctrl.currentPage" items-per-page="$ctrl.pageItems" previous-text="上一页" next-text="下一页" max-size="$ctrl.maxSize" class="pagination-sm" boundary-link-numbers="true"
+                        ng-change="$ctrl.pageChanged()">
+                    </ul>
+                </div>
+            </div>
     </div>
 </div>
 </div>

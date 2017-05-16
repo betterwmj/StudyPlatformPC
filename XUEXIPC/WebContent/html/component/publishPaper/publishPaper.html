@@ -26,13 +26,13 @@
                 <tbody>
                 <tr ng-repeat="paper in $ctrl.papers">        
                     <td>
-                        <a ui-sref="teacher.paperDetail({testpaperID:paper.testpaperID,testName:paper.testName})" ng-bind="paper.testName"></a>
+                        <a ui-sref="teacher.paperDetail({testpaperID:paper.testpaperID,testName:paper.testName,currentPage:$ctrl.currentPage,pageItems:$ctrl.pageItems,totalItems:$ctrl.totalItems})" ng-bind="paper.testName"></a>
                     </td>
                      <td ng-bind="paper.createTime | date:'yyyy-MM-dd HH:mm:ss'"> </td>
                     <td>
                        <button class="btn" ng-if="paper.status === 0" ng-click="$ctrl.publishPaper(paper)">发布<button>
                     
-                       <button class="btn" ng-if="paper.status === 1"  ui-sref="teacher.paperResult({testpaperID:paper.testpaperID,testName:paper.testName})">查看</button>
+                       <button class="btn" ng-if="paper.status === 1"  ui-sref="teacher.paperResult({testpaperID:paper.testpaperID,testName:paper.testName,currentPage:$ctrl.currentPage,pageItems:$ctrl.pageItems,totalItems:$ctrl.totalItems})">查看</button>
                     </td>
                      <td>
                        <button class="btn"  ng-click="$ctrl.deletePaper(paper.testpaperID)">删除</button>
@@ -43,6 +43,13 @@
                  </tr>
                 </tbody>
             </table>
+             <div class="table-footer">
+                <div class="float-right">
+                    <ul class="pager" uib-pagination total-items="$ctrl.totalItems" ng-model="$ctrl.currentPage" items-per-page="$ctrl.pageItems" previous-text="上一页" next-text="下一页" max-size="$ctrl.maxSize" class="pagination-sm" boundary-link-numbers="true"
+                        ng-change="$ctrl.pageChanged()">
+                    </ul>
+                </div>
+            </div>
              <a ng-href="{{$ctrl.paperLink}}" download="a.txt" id="download_paper" style="display:none;">下载试卷</a>
         </div>
     </div>

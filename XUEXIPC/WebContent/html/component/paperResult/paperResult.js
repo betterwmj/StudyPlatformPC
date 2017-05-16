@@ -17,6 +17,9 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       testName:$stateParams.testName,
       testpaperID:$stateParams.testpaperID,
     }
+    vm.currentPage = $stateParams.currentPage;
+	vm.pageItems = $stateParams.pageItems;
+	vm.totalItems = $stateParams.totalItems;
     if( vm.paper === null || vm.paper.testpaperID === null ){
       return;
     }
@@ -24,6 +27,8 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       vm.paperResultList = await http.get("GetPaperResult",{
         paperID:vm.paper.testpaperID
       });
+     
+     
     } catch (error) {
       showErrMsg("获取试卷作答结果异常");
     }

@@ -17,6 +17,9 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       testName:$stateParams.testName,
       testpaperID:$stateParams.testpaperID,
     }
+    vm.currentPage = $stateParams.currentPage;
+	vm.pageItems = $stateParams.pageItems;
+	vm.totalItems = $stateParams.totalItems;
     if( vm.paper === null || vm.paper.testpaperID === null ){
       return;
     }
@@ -24,9 +27,12 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       vm.paperDetail = await http.get("GetPaperDetail",{
         paperID:vm.paper.testpaperID
       });
+     
+     
     } catch (error) {
       showErrMsg("获取试卷详情异常");
     }
+    //$state.go("teacher.publishPaper",{currentPage:vm.currentPage,pageItems:vm.pageItems,totalItems:vm.totalItems});    
   }
   function showErrMsg(errMsg) {
 	     
