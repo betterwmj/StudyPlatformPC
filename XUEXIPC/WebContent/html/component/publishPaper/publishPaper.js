@@ -14,7 +14,7 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
   vm.paperLink = null;
   vm.isDownload =false;
   vm.currentPage=1;
-  vm.pageItems =4;
+  vm.pageItems =8;
   vm.maxSize = 5;
   vm.totalItems =0;
   vm.$onInit = async function(){

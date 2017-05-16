@@ -19,6 +19,13 @@
 	                                      回 复 时间<span ng-bind="reply.answerTime|date:'yyyy-MM-dd HH:mm:ss'"></span>
 	            <span class="icon icon-trash" ng-show="$ctrl.userinfoId===reply.answerId" ng-click="$ctrl.deleleReply(reply.id,reply.answerId)"></span>
 	        </div>
+	         <div class="table-footer">
+                <div class="float-right">
+                    <ul class="pager" uib-pagination total-items="$ctrl.totalReplyItems" ng-model="$ctrl.currentReplyPage" items-per-page="$ctrl.replyPageItem" previous-text="上一页" next-text="下一页" max-size="$ctrl.maxSize" class="pagination-sm" boundary-link-numbers="true"
+                        ng-change="$ctrl.pageChanged()">
+                    </ul>
+                </div>
+            </div>
 	      <button type="button" class="btn btn-default" ng-click="$ctrl.reply()">回复</button><br>
 	      <div ng-show="$ctrl.isShow">
 		      <textarea rows="8" cols="35" ng-model="$ctrl.answerContent"></textarea><br>

@@ -10,7 +10,7 @@ export default function root(app){
 function controller($scope,$element,$state,$cookies,http,$stateParams,){
   let vm = this;
   vm.currentPage=1;
-  vm.pageItems =4;
+  vm.pageItems =8;
   vm.maxSize = 5;
   vm.totalItems =0;
   vm.$onInit = async function(){
