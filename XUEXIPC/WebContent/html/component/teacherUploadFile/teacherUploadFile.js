@@ -36,7 +36,7 @@ function controller($scope,$rootScope,$element,$state,$cookies,$transitions,http
 			   try {
 
 				   if(file.length!=0){
-					   let result = await http.submitForm("UploadImage",formData,{     
+					   let result = await http.submitForm("UploadFile",formData,{     
 		                    progress: 
 		                      function(e){
 			                        if (e.lengthComputable) {
