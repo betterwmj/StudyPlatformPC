@@ -17,10 +17,16 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	vm.isHistroy =null;
     vm.imgUrl=null;
 	vm.userinfo = null;
+	vm.currentReplyPage =1;
+	vm.replyPageItem=7;
+	vm.totalReplyItems=0;
 	function init(){ 
 	    vm.onlineQuesionsDetail = $stateParams.onlineQuestionsDetail; 
 	    vm.currentClass = $stateParams.currentClass;
 	    vm.isHistroy = $stateParams.isHistroy;
+	    vm.currentPage = $stateParams.currentPage;
+	     vm.pageItems = $stateParams.pageItems;
+	     vm.totalItems = $stateParams.totalItems;
 	    vm.userinfo = $cookies.getObject("userInfo");
 	    vm.userinfoId =parseInt("10", vm.userinfo.id);
 	    getQuestionReply();
@@ -29,6 +35,9 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
 	        imgInputs.eq(0).bind("change",onSelectImg);
 	    },0);
    }
+	 vm.pageChanged=function(){
+		  getQuestionReply();
+	   }
    vm.reply=function(){
 	   vm.isShow = true;
 	   vm.msg="";
@@ -112,8 +121,15 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
    }
    async function getQuestionReply(){	
 	   try {
-		   let result= await http.get('getQuestionAnswer',{questionID:vm.onlineQuesionsDetail.id});
+		   let result= await http.get('getQuestionAnswer',{
+			   questionID:vm.onlineQuesionsDetail.id,
+			   currentPage:vm.currentReplyPage,
+			   pageItems:vm.replyPageItem
+			   });
 		   vm.replyList =result;
+		   if( result.length!==0){
+		          vm.totalReplyItems =result[0].count;
+		     }
 		   vm.replyList.forEach( async (item)=>{
 			   item.answerTime =new Date(item.answerTime.time);
 			   if(item.type ===0){
@@ -138,9 +154,9 @@ function controller($scope, $cookies,$element,$state,http,$stateParams,){
    }
    vm.previousPage =function(){
 	   if(vm.isHistroy === true){
-		   $state.go("student.studentQuestionHistory");
+		   $state.go("student.studentQuestionHistory",{currentPage:vm.currentPage,pageItems:vm.pageItems,totalItems:vm.totalItems});
 	   }else{
-		   $state.go("student.onlineQuestion",{currentClass:vm.currentClass});
+		   $state.go("student.onlineQuestion",{currentClass:vm.currentClass,currentPage:vm.currentPage,pageItems:vm.pageItems,totalItems:vm.totalItems});
 	   }   
    }
    vm.deleleReply = async function(replyId,answerId){

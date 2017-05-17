@@ -24,12 +24,19 @@
                         <td ng-bind="question.questionTitle"></td>
                         <td ng-bind="question.createTime|date:'yyyy-MM-dd HH:mm:ss'"></td> 
                         <td> 
-                        	 <a class="btn" ui-sref="student.studentOnlineAnswerDetail({'onlineQuestionsDetail':question,'currentClass':$ctrl.currentClass,'isHistroy':true})">查看详情</a>
+                        	 <a class="btn" ui-sref="student.studentOnlineAnswerDetail({'onlineQuestionsDetail':question,'currentClass':$ctrl.currentClass,'isHistroy':true,currentPage:$ctrl.currentPage,pageItems:$ctrl.pageItems,totalItems:$ctrl.totalItems})">查看详情</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
+                   <div class="table-footer">
+                <div class="float-right">
+                    <ul class="pager" uib-pagination total-items="$ctrl.totalItems" ng-model="$ctrl.currentPage" items-per-page="$ctrl.pageItems" previous-text="上一页" next-text="下一页" max-size="$ctrl.maxSize" class="pagination-sm" boundary-link-numbers="true"
+                        ng-change="$ctrl.pageChanged()">
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </div>

@@ -44,11 +44,17 @@ function controller($scope,$element,$state,$cookies,http){
       classId:vm.currentClass.classes.classId,
       studentIds:[],
     };
+  
+    	
     vm.students.forEach( (student)=>{
       if( student.isCheck === true){
         data.studentIds.push(student.userID);
       }
     });
+    if( data.studentIds.length===0)
+    {
+    	showErrMsg("您还未选择！");
+    }
     let result = await http.post('AssignStudent',data);
     if(result === true){
       showErrMsg("分配班级成功");
