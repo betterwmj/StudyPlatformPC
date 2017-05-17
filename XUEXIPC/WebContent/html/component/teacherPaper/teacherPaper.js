@@ -58,6 +58,11 @@ function controller($scope,$element,$state,$cookies,http){
       showErrMsg("请选择题目且合理配置试卷分数");
       return;
     }
+    if(totalScore!==100){
+    
+    	showErrMsg("试卷总分需为100分!目前为"+totalScore+"分");
+    	return ;
+    }
     let confirmMsg = "确定创建试卷?共"+count+"道题,共"+totalScore+"分";
     let confirm = await showConfrimMsg(confirmMsg);
     if(confirm === "确定"){
