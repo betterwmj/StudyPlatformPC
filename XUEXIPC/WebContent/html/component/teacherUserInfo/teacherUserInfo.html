@@ -7,7 +7,8 @@
      </div>
     <div class="panel">
         <div class="panel-body">
-            <div class="form col2 clearfix">
+            <div class="panel-body clearfix">
+              <div class="form col2">
                 <div class="form-item">
                     <span class="label">教工号</span>
                     <span class="input">
@@ -45,5 +46,39 @@
             </div>
             <span style="color:red">{{message}}</span>
         </div>
+         <button type="button" class="btn btn-impo" ng-click="$ctrl.upload()">上传学习资料</button>
+         
     </div>
+      <div class="panel">
+        <div class="panel-body clearfix">
+            <div class="form col2">
+     
+                <div class="form-item" ng-show="$ctrl.isShow">
+                    <span class="label">文件上传进度</span>
+                    <span class="progress-bar">
+                        <div class="progress-bar-inner"  ng-attr-style="width:{{$ctrl.progress+'%'}};">
+                            {{$ctrl.progress+'%'}}
+                        </div>
+                    </span>
+                </div>
+                <div class="form-item single-line" ng-show="$ctrl.isShow">
+                    <span class="file clearfix">
+                        <!--选择文件之后，将文件路径绑定到file-item的背景中，将pre-select类替换成select类，即隐藏加号图标，显示垃圾桶图标，点击垃圾桶图标可删除图片-->
+                        <div  class="file-item pre-select imgArray" background-size: contain;">
+                     
+                             <input type="file"  class="js_file">  
+                        </div>
+                    </span>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group" ng-show="$ctrl.isShow">
+                 <button type="button"  class="btn btn-impo" ng-click="$ctrl.uploadFile()">上传</button>
+            </div>
+            <span style="color:red" ng-bind="$ctrl.msg"></span>
+        </div>
+    </div>
+</div>
 </div>

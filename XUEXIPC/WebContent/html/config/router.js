@@ -611,6 +611,7 @@ export function routerConfig($stateProvider){
 					},
 				}
 			},
+			
 			{
 				name:"admin",
 				url:'/admin',

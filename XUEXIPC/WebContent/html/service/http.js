@@ -3,24 +3,26 @@ export default function httpService(app){
 }
 
 function serviceFunc($q,$http,$httpParamSerializerJQLike,$rootScope,$mdDialog){
-  const baseUrl = "http://localhost:8080/XUEXI/";
+  const baseUrl = "http://192.168.191.4:8080/XUEXI/";
   let service = {
     post:post,
     get:get,
     submitForm:submitForm
   };
 
-  async function submitForm(url,data){
+  async function submitForm(url,data,config){
      url = baseUrl + url;
      let deferred = $q.defer();
      let response = null;
+     let progress=0;
+     config = config || {};
      try {
         response = await $http({
           method: 'POST',
           url: url,
           data: data,
           headers: { 'Content-Type': undefined},
-          transformRequest: angular.identity
+          uploadEventHandlers:config
         });
         let result = response.data;
         if( result.code === 0 ){

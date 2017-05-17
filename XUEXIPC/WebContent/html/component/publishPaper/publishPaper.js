@@ -53,10 +53,7 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
       });
       if( result === true ){
         showErrMsg("发布试卷成功");
-        vm.papers = await http.get("GetPaper");
-        vm.papers.forEach( (item)=>{
-      	  item.createTime =new Date(item.createTime.time);
-        });
+    	getPaper();
       }else{
         showErrMsg("发布试卷失败");
       }
@@ -72,10 +69,7 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
 		      });
 		      if( result === true ){
 		        showErrMsg("试卷删除成功");
-		        vm.papers = await http.get("GetPaper");
-		        vm.papers.forEach( (item)=>{
-		      	  item.createTime =new Date(item.createTime.time);
-		        });
+		        getPaper();
 		      }else{
 		        showErrMsg("删除失败");
 		      }
