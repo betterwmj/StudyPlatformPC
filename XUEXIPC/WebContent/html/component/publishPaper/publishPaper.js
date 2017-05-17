@@ -84,18 +84,13 @@ function controller($scope,$element,$state,$cookies,http,$stateParams){
   vm.downloadPaper =async function(paperId){
 	  let result = await http.get("DownLoadPaper",{paperID:paperId});
 	  vm.paperLink = result;
-      dialog.openDialog({
-          type: "normal",
-          title: "提示信息",
-          content: "试卷生成成功，文件路径如下：\n" +  vm.paperLink + "\n"
-      })
-      .then( (btn) => {
-          let downLink = document.getElementById("download_paper");
-          let event = document.createEvent("MouseEvents"); 
-          event.initEvent("click", false, false); 
-          downLink.dispatchEvent(event);
-      });
-	  
+	  let confirm =await showConfrimMsg("试卷生成成功，文件路径如下：\n" +  vm.paperLink + "\n");
+	  if(confirm ==="确定"){
+		  let downLink = document.getElementById("download_paper");
+	        let event = document.createEvent("MouseEvents"); 
+	        event.initEvent("click", false, false); 
+	        downLink.dispatchEvent(event);
+	  }
   }
   function showErrMsg(errMsg) {
 	     

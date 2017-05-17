@@ -63,12 +63,13 @@
                     </td>
                      <td>
                        <button class="btn"  ng-click="$ctrl.downloadPaper(paper.testpaperID)">生成试卷</button>
-                         <a href="{{$ctrl.paperLink}}" download="a.txt" ng-show="$ctrl.isDownload">下载试卷</a>
+                   
                     </td>
                 </tbody>
                  
             </table>
             
         </div>
+         <a ng-href="{{$ctrl.paperLink}}" download="a.txt" id="download_paper" style="display:none;">下载试卷</a>
     </div>
 </div>
