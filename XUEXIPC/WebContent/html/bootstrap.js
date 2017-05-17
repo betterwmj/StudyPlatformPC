@@ -33,6 +33,8 @@ import teacherHomeworkResultDetail from "./component/teacherHomeworkResultDetail
 import onlineAnswer from "./component/onlineAnswer/onlineAnswer.js";
 import teacherOnlineAnswerNavigation from "./component/teacherOnlineAnswerNavigation/teacherOnlineAnswerNavigation.js";
 import teacheronlineHistoryAnswer from "./component/teacheronlineHistoryAnswer/teacheronlineHistoryAnswer.js";
+import teacherUploadFile from "./component/teacherUploadFile/teacherUploadFile.js";
+
 
 import studentTestPaperResultDetail from "./component/studentTestPaperResultDetail/studentTestPaperResultDetail.js";
 import studentHomework from "./component/studentHomework/studentHomework.js";
@@ -80,6 +82,8 @@ teacherManagerClassCreate(app);
 teacherAssignStudent(app);
 teacherPaper(app);
 teacherPaperNavigation(app);
+teacherUploadFile(app);
+
 publishPaper(app);
 paperResult(app);
 httpService(app);
